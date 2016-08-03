@@ -1,0 +1,5 @@
+# Include prod requirements.txt
+-r requirements.txt
+
+# Development dependencies
+Flask-Script==2.0.5

@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en" data-framework="angularjs">
+	<head>
+		<meta charset="utf-8">
+		<title>My App</title>
+		<style>[ng-cloak] { display: none; }</style>
+
+		<!-- build:css -->
+		<link rel="stylesheet" href="/static/css/base.css" media="screen" title="no title" charset="utf-8">
+		<link rel="stylesheet" href="/static/css/index.css" media="screen" title="no title" charset="utf-8">
+		<!-- endbuild -->
+	</head>
+	<body ng-app="todomvc">
+		{{hello}}
+		<ng-view></ng-view>
+		<!-- build:js -->
+		<script src="/static/bundle.js"></script>
+		<!-- endbuild -->
+	</body>
+</html>
