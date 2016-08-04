@@ -1,6 +1,6 @@
 from __future__ import absolute_import
 import logging
-from flask import Flask, redirect, request, session, url_for, render_template
+from flask import Flask
 
 def create_app(config=None, debug=False, testing=False, config_overrides=None):
     """ Create the flask application
@@ -11,7 +11,7 @@ def create_app(config=None, debug=False, testing=False, config_overrides=None):
             config_overrides a dictionary given if config has to be overrides
     """
     app = Flask(__name__)
-    
+
     if config is not None:
         app.config.from_object(config)
 
@@ -30,10 +30,6 @@ def create_app(config=None, debug=False, testing=False, config_overrides=None):
     # Configure logging
     if not app.testing:
         logging.basicConfig(level=logging.INFO)
-
-    # Setup the data model.
-    # with app.app_context():
-    #     db.init_app(app)
 
     # Add an error handler. This is useful for debugging the live application,
     # however, you should disable the output of the exception for production

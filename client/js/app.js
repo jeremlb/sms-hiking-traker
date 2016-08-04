@@ -18,9 +18,6 @@ var module = angular.module('todomvc', [
 
 
 module.controller('TodoCtrl', require('./controllers/todoCtrl'));
-module.factory('api', require('./services/todoApi'));
-module.factory('todoStorage', require('./services/todoStorage'));
-module.factory('localStorage', require('./services/localStorage'));
 
 module.directive('todoEscape', require('./directives/todoEscape'));
 module.directive('todoFocus', require('./directives/todoFocus'));

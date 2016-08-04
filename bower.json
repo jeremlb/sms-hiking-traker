@@ -13,8 +13,5 @@
   ],
   "dependencies": {
     "lumx": "^1.1.0"
-  },
-  "main": {
-    "lumx": "bower_components/lumx/dist/lumx.js"
   }
 }
