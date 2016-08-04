@@ -9,3 +9,4 @@ node_modules/
 server/static
 npm-debug.log
 server/templates/index.html
+server/config

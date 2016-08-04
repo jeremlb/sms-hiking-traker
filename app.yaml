@@ -1,13 +1,15 @@
 runtime: python27
 threadsafe: true
-module: default
-version: 1
-application: my-application
+service: default
 api_version: 1
 
 handlers:
 - url: /static
   static_dir: server/static
+
+- url: /dev
+  script: server.dev.app
+  secure: always
 
 - url: /.*
   script: server.main.app
@@ -39,3 +41,6 @@ skip_files:
 - server/manage.py
 - .venv/bin
 - .venv/include
+- .venv/
+- .python-libs/setuptools
+- scripts/
