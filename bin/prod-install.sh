@@ -8,6 +8,7 @@ echo "======= Server installation (PIP) ======"
 rm -rf .venv
 virtualenv --clear .venv
 source .venv/bin/activate
+pip install -r requirements.txt
 rm -rf .python-libs
 linkenv .venv/lib/python2.7/site-packages .python-libs
 
@@ -16,6 +17,3 @@ bower install
 
 echo "======= Development libs install (NPM) ======"
 npm i --env=prod
-
-echo "======= Prepararing application in DEV MODE ======"
-npm run prod

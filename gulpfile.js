@@ -108,7 +108,7 @@ gulp.task('replace:prod', function () {
 	return gulp.src('client/index.html')
 		.pipe(plugins.htmlReplace({
 			js: '/static/bundle.min.js',
-			css: '/static/css/main.min.css'
+			// css: '/static/css/main.min.css'
 		}))
 		.pipe(plugins.htmlmin({collapseWhitespace: true}))
 		.pipe(gulp.dest('server/templates'));
@@ -125,7 +125,7 @@ gulp.task("build:dev", ['clean:all'], function () {
 
 gulp.task("build:prod", ['clean:all'], function () {
 	gulp.start("webpack:prod");
-	gulp.start("css:prod");
+	// gulp.start("css:prod");
 	gulp.start("img:prod");
 	gulp.start('replace:prod');
 });

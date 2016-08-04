@@ -44,3 +44,4 @@ skip_files:
 - .venv/
 - .python-libs/setuptools
 - scripts/
+- client/
