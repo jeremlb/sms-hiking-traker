@@ -5,7 +5,8 @@ var webpack = require("webpack");
 var webpackConfig = require("./webpack.config.js");
 
 var files = {
-	css: ['/static/css/base.css', '/static/css/index.css']
+	// css: ['/static/css/base.css', '/static/css/index.css']
+	css: []
 };
 
 // Include plugins
@@ -117,7 +118,7 @@ gulp.task('clean:all', ['clean', 'symlink'])
 
 gulp.task("build:dev", ['clean:all'], function () {
 	gulp.start("webpack:dev");
-	gulp.start("css:dev");
+	// gulp.start("css:dev");
 	gulp.start("img:dev");
 	gulp.start('replace:dev');
 });

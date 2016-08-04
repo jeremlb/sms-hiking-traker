@@ -23,236 +23,238 @@
  Nicolas Laplante - https://plus.google.com/108189012221374960701
  Nicholas McCready - https://twitter.com/nmccready
  */
-(function (window) {
-    'use strict';
-    var angular = window.angular;
 
-    /*
-        Utils functions to load Google Maps API
-     */
+var angular = require('angular');
 
-     function isKeyInArray(key, arraycompare) {
-         var status = false;
-         for(var i = 0; i < arraycompare.length && status === false; i += 1) {
-             if(arraycompare[i] === key) {
-                 status = true;
-             }
+'use strict';
+
+/*
+    Utils functions to load Google Maps API
+ */
+
+ function isKeyInArray(key, arraycompare) {
+     var status = false;
+     for(var i = 0; i < arraycompare.length && status === false; i += 1) {
+         if(arraycompare[i] === key) {
+             status = true;
          }
-
-         return status;
      }
 
-    var utils = (function () {
-        function generateOptions(options, omit) {
-            var params = [];
-            for(var option in options) {
-                if(isKeyInArray(option, omit) === false) {
-                    params.push(option + '=' + options[option]);
-                }
-            }
+     return status;
+ }
 
-            return params;
+var utils = (function () {
+    function generateOptions(options, omit) {
+        var params = [];
+        for(var option in options) {
+            if(isKeyInArray(option, omit) === false) {
+                params.push(option + '=' + options[option]);
+            }
         }
 
-        return {
-            generateOptions: generateOptions
-        };
-    })();
+        return params;
+    }
 
-    window.MapServiceException = function (message) {
-        this.message = message;
-        this.name = 'MapServiceException';
+    return {
+        generateOptions: generateOptions
     };
+})();
 
-    var module = angular.module('gmaploader', []).factory('uiGmapMapScriptLoader', [
-        '$q', 'uiGmapuuid', function($q, uuid) {
-            var getScriptUrl, includeScript, isGoogleMapsLoaded, scriptId;
-            scriptId = void 0;
-            getScriptUrl = function(options) {
-                if (options.china) {
-                    return 'http://maps.google.cn/maps/api/js?';
+function MapServiceException(message) {
+    this.message = message;
+    this.name = 'MapServiceException';
+};
+
+var gmaploader = angular.module('gmaploader', []).factory('uiGmapMapScriptLoader', [
+    '$q', 'uiGmapuuid', function($q, uuid) {
+        var getScriptUrl, includeScript, isGoogleMapsLoaded, scriptId;
+        scriptId = void 0;
+        getScriptUrl = function(options) {
+            if (options.china) {
+                return 'http://maps.google.cn/maps/api/js?';
+            } else {
+                if (options.transport === 'auto') {
+                    return '//maps.googleapis.com/maps/api/js?';
                 } else {
-                    if (options.transport === 'auto') {
-                        return '//maps.googleapis.com/maps/api/js?';
-                    } else {
-                        return options.transport + '://maps.googleapis.com/maps/api/js?';
-                    }
+                    return options.transport + '://maps.googleapis.com/maps/api/js?';
                 }
-            };
-            includeScript = function(options) {
-                var omitOptions, query, script;
-                omitOptions = ['transport', 'isGoogleMapsForWork', 'china'];
-                if (options.isGoogleMapsForWork) {
-                    omitOptions.push('key');
-                }
-                query = utils.generateOptions(options, omitOptions);
+            }
+        };
+        includeScript = function(options) {
+            var omitOptions, query, script;
+            omitOptions = ['transport', 'isGoogleMapsForWork', 'china'];
+            if (options.isGoogleMapsForWork) {
+                omitOptions.push('key');
+            }
+            query = utils.generateOptions(options, omitOptions);
 
-                if (scriptId) {
-                    document.getElementById(scriptId).remove();
-                }
-                query = query.join('&');
-                script = document.createElement('script');
-                script.id = scriptId = 'ui_gmap_map_load_' + (uuid.generate());
-                script.type = 'text/javascript';
-                script.src = getScriptUrl(options) + query;
-                return document.body.appendChild(script);
-            };
-            isGoogleMapsLoaded = function() {
-                return angular.isDefined(window.google) && angular.isDefined(window.google.maps);
-            };
-            return {
-                load: function(options) {
-                    var deferred, randomizedFunctionName;
-                    deferred = $q.defer();
-                    if (isGoogleMapsLoaded()) {
-                        deferred.resolve(window.google.maps);
-                        return deferred.promise;
-                    }
-                    randomizedFunctionName = options.callback = 'onGoogleMapsReady' + Math.round(Math.random() * 1000);
-                    window[randomizedFunctionName] = function() {
-                        window[randomizedFunctionName] = null;
-                        deferred.resolve(window.google.maps);
-                    };
-                    if (window.navigator.connection && window.Connection && window.navigator.connection.type === window.Connection.NONE) {
-                        document.addEventListener('online', function() {
-                            if (!isGoogleMapsLoaded()) {
-                                return includeScript(options);
-                            }
-                        });
-                    } else {
-                        includeScript(options);
-                    }
+            if (scriptId) {
+                document.getElementById(scriptId).remove();
+            }
+            query = query.join('&');
+            script = document.createElement('script');
+            script.id = scriptId = 'ui_gmap_map_load_' + (uuid.generate());
+            script.type = 'text/javascript';
+            script.src = getScriptUrl(options) + query;
+            return document.body.appendChild(script);
+        };
+        isGoogleMapsLoaded = function() {
+            return angular.isDefined(window.google) && angular.isDefined(window.google.maps);
+        };
+        return {
+            load: function(options) {
+                var deferred, randomizedFunctionName;
+                deferred = $q.defer();
+                if (isGoogleMapsLoaded()) {
+                    deferred.resolve(window.google.maps);
                     return deferred.promise;
                 }
-            };
-        }
-    ]);
-
-    module.provider('uiGmapGoogleMapApi', function() {
-        this.options = {
-            transport: 'https',
-            isGoogleMapsForWork: false,
-            china: false,
-            v: '3',
-            libraries: '',
-            language: 'fr'
-        };
-        this.configure = function(options) {
-            angular.extend(this.options, options);
-        };
-        this.$get = [
-            'uiGmapMapScriptLoader', (function(_this) {
-                return function(loader) {
-                    return loader.load(_this.options);
+                randomizedFunctionName = options.callback = 'onGoogleMapsReady' + Math.round(Math.random() * 1000);
+                window[randomizedFunctionName] = function() {
+                    window[randomizedFunctionName] = null;
+                    deferred.resolve(window.google.maps);
                 };
-            })(this)
-        ];
-        return this;
-    });
-
-    module.service('uiGmapuuid', function() {
-        /*
-         Version: core-1.0
-         The MIT License: Copyright (c) 2012 LiosK.
-         */
-        function UUID(){}UUID.generate=function(){var a=UUID._gri,b=UUID._ha;return b(a(32),8)+'-'+b(a(16),4)+'-'+b(16384|a(12),4)+'-'+b(32768|a(14),4)+'-'+b(a(48),12)};UUID._gri=function(a){return 0>a?NaN:30>=a?0|Math.random()*(1<<a):53>=a?(0|1073741824*Math.random())+1073741824*(0|Math.random()*(1<<a-30)):NaN};UUID._ha=function(a,b){for(var c=a.toString(16),d=b-c.length,e='0';0<d;d>>>=1,e+=e)d&1&&(c=e+c);return c};
-        return UUID;
-    });
-
-    module.service('uiGmapManager', ['$q', 'uiGmapGoogleMapApi', function ($q, uiGmapGoogleMapApi) {
-        var service = {
-            isMapReady: isMapReady,
-            onReady: onReady,
-            createMap: createMap,
-            getMap: getMap,
-            hasElement: hasElement,
-            setElement: setElement,
-            getElement: getElement
-        };
-
-        var _isMapReady = false;
-        var _waitingForDirective = false;
-
-        var _map = null;
-        var _element = null;
-        var _callbackMapReadyListener = [];
-        var _callbackCreateMapListener = [];
-
-        uiGmapGoogleMapApi.then(function(maps) {
-            _isMapReady = true;
-
-            for(var i = 0; i < _callbackMapReadyListener.length; i += 1) {
-                _callbackMapReadyListener[i](maps);
+                if (window.navigator.connection && window.Connection && window.navigator.connection.type === window.Connection.NONE) {
+                    document.addEventListener('online', function() {
+                        if (!isGoogleMapsLoaded()) {
+                            return includeScript(options);
+                        }
+                    });
+                } else {
+                    includeScript(options);
+                }
+                return deferred.promise;
             }
+        };
+    }
+]);
 
-            _callbackMapReadyListener = [];
+gmaploader.provider('uiGmapGoogleMapApi', function() {
+    this.options = {
+        transport: 'https',
+        isGoogleMapsForWork: false,
+        china: false,
+        v: '3',
+        libraries: '',
+        language: 'fr'
+    };
+    this.configure = function(options) {
+        angular.extend(this.options, options);
+    };
+    this.$get = [
+        'uiGmapMapScriptLoader', (function(_this) {
+            return function(loader) {
+                return loader.load(_this.options);
+            };
+        })(this)
+    ];
+    return this;
+});
+
+gmaploader.service('uiGmapuuid', function() {
+    /*
+     Version: core-1.0
+     The MIT License: Copyright (c) 2012 LiosK.
+     */
+    function UUID(){}UUID.generate=function(){var a=UUID._gri,b=UUID._ha;return b(a(32),8)+'-'+b(a(16),4)+'-'+b(16384|a(12),4)+'-'+b(32768|a(14),4)+'-'+b(a(48),12)};UUID._gri=function(a){return 0>a?NaN:30>=a?0|Math.random()*(1<<a):53>=a?(0|1073741824*Math.random())+1073741824*(0|Math.random()*(1<<a-30)):NaN};UUID._ha=function(a,b){for(var c=a.toString(16),d=b-c.length,e='0';0<d;d>>>=1,e+=e)d&1&&(c=e+c);return c};
+    return UUID;
+});
+
+gmaploader.service('uiGmapManager', ['$q', 'uiGmapGoogleMapApi', function ($q, uiGmapGoogleMapApi) {
+    var service = {
+        isMapReady: isMapReady,
+        onReady: onReady,
+        createMap: createMap,
+        getMap: getMap,
+        hasElement: hasElement,
+        setElement: setElement,
+        getElement: getElement
+    };
+
+    var _isMapReady = false;
+    var _waitingForDirective = false;
+
+    var _map = null;
+    var _element = null;
+    var _callbackMapReadyListener = [];
+    var _callbackCreateMapListener = [];
+
+    uiGmapGoogleMapApi.then(function(maps) {
+        _isMapReady = true;
+
+        for(var i = 0; i < _callbackMapReadyListener.length; i += 1) {
+            _callbackMapReadyListener[i](maps);
+        }
+
+        _callbackMapReadyListener = [];
+    });
+
+    function isMapReady () {
+        return _isMapReady;
+    }
+
+    function onReady() {
+        var deferred = $q.defer();
+
+        if(_isMapReady === true) {
+            deferred.resolve(_map);
+        } else {
+            _callbackMapReadyListener.push(function () {
+                deferred.resolve();
+            });
+        }
+
+        return deferred.promise;
+    }
+
+    function createMap(mapOptions) {
+        var deferred = $q.defer();
+
+        _callbackCreateMapListener.push(function (_map) {
+            deferred.resolve(_map);
         });
 
-        function isMapReady () {
-            return _isMapReady;
-        }
-
-        function onReady() {
-            var deferred = $q.defer();
-
-            if(_isMapReady === true) {
-                deferred.resolve(_map);
+        if(_element !== null) {
+            if(_map === null) {
+                _map = new google.maps.Map(_element, mapOptions);
             } else {
-                _callbackMapReadyListener.push(function () {
-                    deferred.resolve();
-                });
+                _map.setOptions(mapOptions);
             }
 
-            return deferred.promise;
-        }
-
-        function createMap(mapOptions) {
-            var deferred = $q.defer();
-
-            _callbackCreateMapListener.push(function (_map) {
-                deferred.resolve(_map);
-            });
-
-            if(_element !== null) {
-                if(_map === null) {
-                    _map = new google.maps.Map(_element, mapOptions);
-                } else {
-                    _map.setOptions(mapOptions);
-                }
-
-                for(var i = 0; i < _callbackCreateMapListener.length; i += 1) {
-                    _callbackCreateMapListener[i](_map);
-                }
-                _callbackCreateMapListener = [];
-
-            } else {
-                _waitingForDirective = true;
+            for(var i = 0; i < _callbackCreateMapListener.length; i += 1) {
+                _callbackCreateMapListener[i](_map);
             }
+            _callbackCreateMapListener = [];
 
-            return deferred.promise;
+        } else {
+            _waitingForDirective = true;
         }
 
-        function setElement(element) {
-            if(_element === null) {
-                _element = element;
-                return service;
-            }
+        return deferred.promise;
+    }
 
-            throw new MapServiceException('Un seul element peut être créé');
+    function setElement(element) {
+        if(_element === null) {
+            _element = element;
+            return service;
         }
 
-        function hasElement() {
-            return (_element !== null);
-        }
+        throw new MapServiceException('Un seul element peut être créé');
+    }
 
-        function getElement() {
-            return _element;
-        }
+    function hasElement() {
+        return (_element !== null);
+    }
 
-        function getMap() {
-            return _map;
-        }
+    function getElement() {
+        return _element;
+    }
 
-        return service;
-    }]);
-})(window);
+    function getMap() {
+        return _map;
+    }
+
+    return service;
+}]);
+
+module.exports = 'gmaploader';

@@ -16,8 +16,8 @@ module.exports = {
 		loaders: [
 			// Extract css files
             {
-                test: /\.css$/,
-                loader: ExtractTextPlugin.extract("style-loader", "css-loader")
+				test: /\.css$/,
+				loader: "style!css"
             },
 			{
 		      test: /\.js$/,
@@ -35,7 +35,7 @@ module.exports = {
 
     plugins: [
 		new ExtractTextPlugin("[name].css"),
-        new BowerWebpackPlugin({})
+        // new BowerWebpackPlugin({})
     ],
 
 	devtool: 'source-map'

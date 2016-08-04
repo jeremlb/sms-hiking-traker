@@ -1,48 +1,53 @@
 /**
- * The main TodoMVC app module
  *
  * @type {angular.Module}
  */
+
+require('style!css!../css/style.css')
+require('style!css!angular-material/angular-material.css')
+
 var angular = require('angular');
 
-var lumx = require('lumx');
-console.log(lumx);
-var templateUrl = require('ngtemplate!html!./views/todomvc-index.html');
+var templateUrl = require('ngtemplate!html!./views/app-index.html');
 
-var module = angular.module('todomvc', [
+var module = angular.module('jerem-on-the-road', [
 	require('angular-route'),
 	require('angular-resource'),
-	'lumx'
+	require('angular-material'),
+	require('./vendors/gmaploader'),
+	require('angularfire')
 ]);
 
+module.controller('AppCtrl', require('./controllers/AppController'));
 
+module.service('firebaseService', require('./services/firebaseService'));
+module.service('mapService', require('./services/mapService'));
+module.service('photosService', require('./services/photosService'));
+module.service('mapManagerService', require('./services/mapManagerService'));
 
-module.controller('TodoCtrl', require('./controllers/todoCtrl'));
+module.directive('uiMap', require('./directives/uimap'));
 
-module.directive('todoEscape', require('./directives/todoEscape'));
-module.directive('todoFocus', require('./directives/todoFocus'));
-
-module.config(['$routeProvider', function ($routeProvider) {
+module.config(['$routeProvider', 'uiGmapGoogleMapApiProvider',
+			function ($routeProvider, uiGmapGoogleMapApiProvider) {
 		'use strict';
 
 		var routeConfig = {
-			controller: 'TodoCtrl',
-			templateUrl: templateUrl,
-			resolve: {
-				store: ['todoStorage', function (todoStorage) {
-					// Get the correct module (API or localStorage).
-					return todoStorage.then(function (module) {
-						module.get(); // Fetch the todo records in the background.
-						return module;
-					});
-				}]
-			}
+			controller: 'AppCtrl as ctrl',
+			templateUrl: templateUrl
 		};
 
 		$routeProvider
 			.when('/', routeConfig)
-			.when('/:status', routeConfig)
 			.otherwise({
 				redirectTo: '/'
 			});
-	}]);
+
+		uiGmapGoogleMapApiProvider.configure({
+			v: '3.25', //defaults to latest 3.X anyhow
+			libraries: 'weather,geometry,visualization'
+		});
+}]);
+
+angular.element(document).ready(function () {
+  angular.bootstrap(document, ['jerem-on-the-road']);
+});
