@@ -4,7 +4,6 @@ This application is based on :
   - Google App Engine (python Framework and Flask)
   - Firebase (Real-time database)
   - Twilio (SMS server)
-  - gcloud cli tool
 
 To run this project with your own data, you must :
   - Create a Google Cloud Platform project
@@ -13,6 +12,13 @@ To run this project with your own data, you must :
 
 In Twilio configuration you have to configure a Webhook who call the Google App Engine application on /sms-reciever
 
+Requirements:
+  - gcloud cli tool
+  - gcloud google app engine python
+  - virtualenv
+  - npm
+  - bower
+  - python2.7
 
 ## Installation
 
@@ -22,6 +28,11 @@ $ ./bin/dev-install.sh
 
 # For refreshing webpack bundle
 $ npm run build:dev
+
+# Start the server
+$ dev_appserver.py app.yaml # start the server on port 8080
+# Go to http://localhost:8080
+
 ```
 
 Set in Firebase your database rules to be read by anyone :
@@ -52,10 +63,10 @@ $ gcloud app browse
 
 Add folder config in server. I removed the folder from the repos to protect my secrets data :)
 
-server/config
-  __init__.py
-  dev.py
-  prod.py
+- server/config
+  - __init__.py
+  - dev.py
+  - prod.py
 
 ```python
 # dev.py
@@ -76,7 +87,6 @@ ACCOUNT_SID = "YOUR_TWILIO_SID"
 AUTH_TOKEN = "YOUR_TWILIO_TOKEN"
 
 MY_PHONE_NUMBER = 'YOUR_PHONE_NUMBER' # Example : +33611223344
-
 ```
 
 You also have to change configuration in client/js/app.js :
