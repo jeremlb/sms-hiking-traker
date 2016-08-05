@@ -43,22 +43,23 @@ module.config(['$routeProvider', 'uiGmapGoogleMapApiProvider',
 			templateUrl: indexTemplate
 		})
 		.when('/about', {
-			controller: 'AboutCtrl as ctrl',
+			// controller: 'AboutCtrl as ctrl',
 			templateUrl: aboutTemplate
 		})
 		.when('/contact', {
-			controller: 'ContactCtrl as ctrl',
+			// controller: 'ContactCtrl as ctrl',
 			templateUrl: contactTemplate
 		})
 		.otherwise({
 			redirectTo: '/'
-		});
 
-	uiGmapGoogleMapApiProvider.configure({
-		v: '3.24', //defaults to latest 3.X anyhow
-		libraries: 'weather,geometry,visualization',
-		key: 'AIzaSyA2kDhi5S_z0Lu8k7HiYRMdwnRumhGA0sc'
-	});
+		});
+	//
+	// uiGmapGoogleMapApiProvider.configure({
+	// 	v: '3.24', //defaults to latest 3.X anyhow
+	// 	libraries: 'weather,geometry,visualization',
+	// 	key: 'AIzaSyA2kDhi5S_z0Lu8k7HiYRMdwnRumhGA0sc'
+	// });
 
 	// use the HTML5 History API
 	// $locationProvider.html5Mode(true);

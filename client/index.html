@@ -19,11 +19,20 @@
 		<!-- endbuild -->
 	</head>
 	<body data-deferred-cloak>
-		<header class="header">
-			<lx-button lx-type="raised">Button</lx-button>
-			<lx-button lx-type="fab"><i class="mdi mdi-plus"></i></lx-button>
+		<header class="bgc-indigo-500 tc-white-1 p+" flex-container="row" flex-column="12">
+			<div flex-item="3">
+				<h1>Jerem sur la route</h1>
+			</div>
+		    <nav flex-item>
+				<a href="#/"><lx-button lx-type="flat" lx-color="white">Follow me !</lx-button></a>
+				<a href="#/about"><lx-button lx-type="flat" lx-color="white">A propos</lx-button></a>
+				<a href="#/contact"><lx-button lx-type="flat" lx-color="white">Contact</lx-button></a>
+			</nav>
 		</header>
-		<ng-view class="main"></ng-view>
+		<div class="main">
+			<ng-view ></ng-view>	
+		</div>
+
 
 		<!-- build:js -->
 		<!-- endbuild -->

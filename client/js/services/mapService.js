@@ -36,10 +36,13 @@ module.exports = ['mapManagerService', function (mapManagerService) {
     function initMap() {}
 
     function addMarker(point) {
-        _markers.push(new google.maps.Marker({
+        var marker = new google.maps.Marker({
             position: new google.maps.LatLng(point.latitude, point.longitude),
             map: _map
-        }));
+        })
+
+        _markers.push(marker);
+        return marker;
     }
 
     return service;

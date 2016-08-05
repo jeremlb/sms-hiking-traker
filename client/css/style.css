@@ -1,14 +1,38 @@
-html, body, .map {
+html, body {
 	height: 100%;
 	width: 100%;
 }
 
-.map-canvas {
-	width: inherit;
-	height: inherit;
+header {
+    position: relative;
+    overflow: hidden;
 }
 
 
-.header {
-	height: 50px;
+header h1 {
+ font-size: 1.4em;
+}
+
+.main {
+    position: absolute;
+    bottom: 0;
+    top: 68px;
+    left: 0;
+    right: 0;
+}
+
+.map, .menu {
+    height: 100%;
+    display: inline-block;
+}
+
+.menu {
+    width: 340px;
+    margin-right: -5px;
+}
+
+.map {
+    width: calc(100% - 339px);
+    display: inline-block;
+    margin-right: -1px;
 }
