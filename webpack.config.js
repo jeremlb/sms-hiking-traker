@@ -35,7 +35,13 @@ module.exports = {
 
     plugins: [
 		new ExtractTextPlugin("[name].css"),
-        // new BowerWebpackPlugin({})
+		new webpack.ProvidePlugin({
+		    $: "jquery",
+		    jQuery: "jquery",
+		    "window.jQuery": "jquery"
+		})
+        // new BowerWebpackPlugin({}),
+
     ],
 
 	devtool: 'source-map'

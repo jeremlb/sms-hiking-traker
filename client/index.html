@@ -6,16 +6,22 @@
 		initial-scale=1.0">
 
 		<title>Jerem sur la route</title>
-		<style>[ng-cloak] { display: none; }</style>
+
+		<style media="screen">
+			/* to hide app when angular not ready */
+			[deferred-cloak], [data-deferred-cloak], [x-deferred-cloak],
+			.deferred-cloak {
+			    display: none;
+			}
+		</style>
 
 		<!-- build:css -->
 		<!-- endbuild -->
 	</head>
-	<body>
-		<header class="header" layout="row">
-			<div flex>First item in row</div>
-			<div flex>Second item in row</div>
-			<!-- <nav><a href="#/about">A propos</a></nav> -->
+	<body data-deferred-cloak>
+		<header class="header">
+			<lx-button lx-type="raised">Button</lx-button>
+			<lx-button lx-type="fab"><i class="mdi mdi-plus"></i></lx-button>
 		</header>
 		<ng-view class="main"></ng-view>
 

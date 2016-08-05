@@ -4,7 +4,6 @@
  */
 
 require('style!css!../css/style.css')
-require('style!css!angular-material/angular-material.css')
 
 var angular = require('angular');
 
@@ -15,8 +14,8 @@ var contactTemplate = require('ngtemplate!html!./views/app-contact.html');
 var module = angular.module('jerem-on-the-road', [
 	require('angular-route'),
 	require('angular-resource'),
-	require('angular-material'),
 	require('./vendors/gmaploader'),
+	require('./vendors/lumx'),
 	require('angularfire')
 ]);
 
@@ -30,6 +29,7 @@ module.service('photosService', require('./services/photosService'));
 module.service('mapManagerService', require('./services/mapManagerService'));
 
 module.directive('uiMap', require('./directives/uimap'));
+module.directive('deferredCloak', require('./directives/deferredCloak'));
 
 module.config(['$routeProvider', 'uiGmapGoogleMapApiProvider',
 	'$locationProvider',

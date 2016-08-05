@@ -4,6 +4,7 @@ This application is based on :
   - Google App Engine (python Framework and Flask)
   - Firebase (Real-time database)
   - Twilio (SMS server)
+  - Angular JS and lumX
 
 To run this project with your own data, you must :
   - Create a Google Cloud Platform project

@@ -41,4 +41,11 @@ def create_app(config=None, debug=False, testing=False, config_overrides=None):
         See logs for full stacktrace
         """.format(e), 500
 
+    # @app.errorhandler(404)
+    # def not_found_error(e):
+    #     return """
+    #     The requested page can't be found: <pre>{}</pre>
+    #     """.format(e), 404
+
+
     return app

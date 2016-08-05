@@ -2,8 +2,9 @@ var angular = require('angular');
 require('firebase/firebase');
 
 module.exports = ['mapService', 'firebaseService', 'photosService',
+		'LxNotificationService',
 		'$firebaseArray', '$scope',
-		function (mapService, firebaseService, photosService, $firebaseArray,
+		function (mapService, firebaseService, photosService, LxNotificationService, $firebaseArray,
 		$scope) {
 
      var _this = this;
@@ -19,7 +20,7 @@ module.exports = ['mapService', 'firebaseService', 'photosService',
 	 };
 
 	 mapService.onResume();
-	 
+
 	 firebase.initializeApp(config);
 	 var ref = firebase.database().ref().child('point');
 
