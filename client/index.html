@@ -1,17 +1,25 @@
 <!doctype html>
-<html lang="en" data-framework="angularjs">
+<html lang="fr" data-framework="angularjs">
 	<head>
 		<meta charset="utf-8">
-		<title>My App</title>
+		<meta name="viewport" content="width=device-width,
+		initial-scale=1.0">
+
+		<title>Jerem sur la route</title>
 		<style>[ng-cloak] { display: none; }</style>
 
 		<!-- build:css -->
 		<!-- endbuild -->
 	</head>
 	<body>
-		<ng-view></ng-view>
+		<header class="header" layout="row">
+			<div flex>First item in row</div>
+			<div flex>Second item in row</div>
+			<!-- <nav><a href="#/about">A propos</a></nav> -->
+		</header>
+		<ng-view class="main"></ng-view>
+
 		<!-- build:js -->
-		<script src="/static/bundle.js"></script>
 		<!-- endbuild -->
 	</body>
 </html>

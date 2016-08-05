@@ -7,3 +7,8 @@ html, body, .map {
 	width: inherit;
 	height: inherit;
 }
+
+
+.header {
+	height: 50px;
+}
