@@ -21,16 +21,15 @@ module.exports = ['$firebaseArray', 'mapService',
 		 if(refs === null) {
 			 firebase.initializeApp(config);
 
-			 ref = firebase.database().ref().child('point');
+			 refs = firebase.database().ref().child('point');
 
-			 points = $firebaseArray(ref);
+			 points = $firebaseArray(refs);
 			 points.$watch(function(event) {
-				 if(event === 'add') {
+				 if(event.event === 'child_added') {
 					 mapService.addMarker(points.$getRecord(event.key));
-					 
-				 } else if (event === 'remove') {
+				 } else if(event.event === 'child_removed') {
 					 mapService.removeMarker(points.$getRecord(event.key));
-				 } else if (event === 'update') {
+				 } else if(event.event === 'child_updated') {
 					 mapService.updateMarker(points.$getRecord(event.key));
 				 }
 			 });

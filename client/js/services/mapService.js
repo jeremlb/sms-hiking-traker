@@ -5,7 +5,9 @@ module.exports = ['mapManagerService', function (mapManagerService) {
 
     var service = {
         onResume: onResume,
-        addMarker: addMarker
+        addMarker: addMarker,
+        deleteMarker: deleteMarker,
+        refreshMarkers: refreshMarkers,
     };
 
     var _map = null;
@@ -43,6 +45,14 @@ module.exports = ['mapManagerService', function (mapManagerService) {
 
         _markers.push(marker);
         return marker;
+    }
+
+    function deleteMarker (point) {
+
+    }
+
+    function refreshMarkers () {
+
     }
 
     return service;

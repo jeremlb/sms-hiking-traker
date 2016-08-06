@@ -20,8 +20,8 @@ var module = angular.module('jerem-on-the-road', [
 ]);
 
 module.controller('AppCtrl', require('./controllers/appController'));
-module.controller('AboutCtrl', require('./controllers/aboutController'));
-module.controller('ContactCtrl', require('./controllers/contactController'));
+// module.controller('AboutCtrl', require('./controllers/aboutController'));
+// module.controller('ContactCtrl', require('./controllers/contactController'));
 
 module.service('firebaseService', require('./services/firebaseService'));
 module.service('mapService', require('./services/mapService'));
@@ -54,12 +54,12 @@ module.config(['$routeProvider', 'uiGmapGoogleMapApiProvider',
 			redirectTo: '/'
 
 		});
-	//
-	// uiGmapGoogleMapApiProvider.configure({
-	// 	v: '3.24', //defaults to latest 3.X anyhow
-	// 	libraries: 'weather,geometry,visualization',
-	// 	key: 'AIzaSyA2kDhi5S_z0Lu8k7HiYRMdwnRumhGA0sc'
-	// });
+
+	uiGmapGoogleMapApiProvider.configure({
+		v: '3.24', //defaults to latest 3.X anyhow
+		libraries: 'weather,geometry,visualization',
+		key: 'AIzaSyA2kDhi5S_z0Lu8k7HiYRMdwnRumhGA0sc'
+	});
 
 	// use the HTML5 History API
 	// $locationProvider.html5Mode(true);
