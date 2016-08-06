@@ -7,9 +7,6 @@
 
 var angular = require('angular');
 
-require('angular-touch');
-require('angular-carousel');
-
 var indexTemplate = require('ngtemplate!html!./views/app-index.html');
 var aboutTemplate = require('ngtemplate!html!./views/app-about.html');
 var contactTemplate = require('ngtemplate!html!./views/app-contact.html');
@@ -21,7 +18,6 @@ var module = angular.module('jerem-on-the-road', [
 	require('./vendors/gmaploader'),
 	require('./vendors/lumx'),
 	require('angularfire'),
-	'angular-carousel'
 ]);
 
 module.controller('AppCtrl', require('./controllers/appController'));
@@ -57,7 +53,6 @@ module.config(['$routeProvider', 'uiGmapGoogleMapApiProvider',
 		})
 		.otherwise({
 			redirectTo: '/'
-
 		});
 
 	uiGmapGoogleMapApiProvider.configure({
