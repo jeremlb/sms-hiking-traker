@@ -21,6 +21,7 @@ var module = angular.module('jerem-on-the-road', [
 ]);
 
 module.controller('AppCtrl', require('./controllers/appController'));
+module.controller('PanelCtrl', require('./controllers/panelController'));
 
 module.service('firebaseService', require('./services/firebaseService'));
 module.service('mapService', require('./services/mapService'));
@@ -28,15 +29,22 @@ module.service('photosService', require('./services/photosService'));
 module.service('mapManagerService', require('./services/mapManagerService'));
 
 module.directive('uiMap', require('./directives/uimap'));
-module.directive('listPanel', require('./directives/listPanel'));
-module.directive('detailPanel', require('./directives/detailPanel'));
+module.directive('uiPanel', require('./directives/uiPanel'));
 module.directive('deferredCloak', require('./directives/deferredCloak'));
 
 module.config(['$routeProvider', 'uiGmapGoogleMapApiProvider',
-	'$locationProvider',
+	'$locationProvider', '$sceDelegateProvider',
 		function ($routeProvider, uiGmapGoogleMapApiProvider,
-		$locationProvider) {
+		$locationProvider, $sceDelegateProvider) {
 	'use strict';
+
+
+	$sceDelegateProvider.resourceUrlWhitelist([
+	    // Allow same origin resource loads.
+	    'self',
+	    // Allow loading from our assets domain.  Notice the difference between * and **.
+	    'https://video.twimg.com/**'
+	  ]);
 
 	$routeProvider
 		.when('/', {

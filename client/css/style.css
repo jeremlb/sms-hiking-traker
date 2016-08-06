@@ -78,7 +78,16 @@ header nav {
     z-index: 0;
 }
 
-.menu .detail-container {
+/* slide in to show the detail */
+.menu .slide-in {
+    transition: 0.6s;
+    left: 0;
+}
+
+/* I don't know why but don't write
+.menu .detail-container
+ */
+.detail-container {
     /*display: none;*/
     background-color: rgb(247,247,247);
     z-index: 1;
@@ -86,16 +95,17 @@ header nav {
     transition: 0.6s;
 }
 
-/* slide in to show the detail */
-.slide-in {
-    transition: 0.6s;
-    left: 0;
-}
-
 .menu .item {
     position: relative;
     padding: 16px;
     padding-bottom: 0;
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none;   /* Chrome/Safari/Opera */
+    -khtml-user-select: none;    /* Konqueror */
+    -moz-user-select: none;      /* Firefox */
+    -ms-user-select: none;       /* Internet Explorer/Edge */
+    user-select: none;           /* Non-prefixed version, currently
+                                      not supported by any browser */
 }
 
 .menu .item:hover, .menu .item-selected {

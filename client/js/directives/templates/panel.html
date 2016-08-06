@@ -1,0 +1,52 @@
+<div class="list-container">
+    <div class="item" ng-repeat="item in panelCtrl.items"
+    ng-click="panelCtrl.showDetail(item)">
+        <div class="item-header">
+            <div class="item-date">{{ item.date }}</div>
+            <div class="item-icons">
+                <img ng-src="{{ item.weather }}" class="bgc-light-green-500">
+                <img ng-src="{{ item.breakType }}" class="bgc-light-green-500">
+            </div>
+        </div>
+        <div class="item-message">
+            {{ item.message | limitTo: 85 }}{{item.message.length > 85 ? '...' : ''}}
+        </div>
+    </div>
+</div>
+<div class="detail-container" ng-class="{'slide-in': panelCtrl.isDetailShown}">
+    <div class="item">
+        <div class="detail-container-back">
+             <lx-button lx-type="icon" lx-color="grey"
+             ng-click="panelCtrl.hideDetail()">
+                 <i class="mdi mdi-arrow-left"></i>
+             </lx-button>
+        </div>
+        <div class="item-header">
+            <div class="item-date">{{ panelCtrl.detailItem.date }}</div>
+            <div class="item-icons">
+                <img ng-src="{{ panelCtrl.detailItem.weather }}" class="bgc-light-green-500">
+                <img ng-src="{{ panelCtrl.detailItem.breakType }}" class="bgc-light-green-500">
+            </div>
+        </div>
+        <div class="item-message" ng-show="panelCtrl.detailItem.message.length > 0">
+            <div class="item-sub-header">MESSAGE</div>
+            {{ panelCtrl.detailItem.message }}
+        </div>
+        <div class="item-photos" ng-show="panelCtrl.detailItem.photos.length > 0">
+            <div class="item-sub-header">PHOTOS</div>
+            <div ng-repeat="photo in panelCtrl.detailItem.photos">
+                <img ng-src="{{ photo.url }}"/>
+            </div>
+        </div>
+        <div class="item-videos" ng-show="panelCtrl.detailItem.videos.length > 0">
+            <div class="item-sub-header">VIDEOS</div>
+            <div ng-repeat="video in panelCtrl.detailItem.videos">
+                <video width="320" height="240" controls>
+                    <source ng-src="{{ video.url }}"
+                    type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </div>
+    </div>
+</div>
