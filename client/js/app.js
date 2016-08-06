@@ -32,6 +32,8 @@ module.service('photosService', require('./services/photosService'));
 module.service('mapManagerService', require('./services/mapManagerService'));
 
 module.directive('uiMap', require('./directives/uimap'));
+module.directive('listPanel', require('./directives/listPanel'));
+module.directive('detailPanel', require('./directives/detailPanel'));
 module.directive('deferredCloak', require('./directives/deferredCloak'));
 
 module.config(['$routeProvider', 'uiGmapGoogleMapApiProvider',

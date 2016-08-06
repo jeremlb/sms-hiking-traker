@@ -74,12 +74,22 @@ header nav {
     font-family: 'Roboto', 'Arial', 'sans-serif';
 }
 
-.menu .detail-container {
-    /*display: none;*/
+.menu .list-container {
+    z-index: 0;
 }
 
-.menu .list-container {
-    display: none;
+.menu .detail-container {
+    /*display: none;*/
+    background-color: rgb(247,247,247);
+    z-index: 1;
+    left: -350px;
+    transition: 0.6s;
+}
+
+/* slide in to show the detail */
+.slide-in {
+    transition: 0.6s;
+    left: 0;
 }
 
 .menu .item {
@@ -89,7 +99,7 @@ header nav {
 }
 
 .menu .item:hover, .menu .item-selected {
-    background-color: rgba(238, 238, 238, 0.3);
+    background-color: rgb(247,247,247);
     cursor: pointer;
 }
 
@@ -143,7 +153,6 @@ header nav {
 }
 
 .menu .detail-container .item {
-    background-color: rgba(238, 238, 238, 0.3);
     cursor: default;
 }
 
