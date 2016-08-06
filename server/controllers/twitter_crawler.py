@@ -48,17 +48,35 @@ def oauth_req(url, key, secret, http_method="GET", \
     resp, content = client.request( url, method=http_method, body=post_body, headers=http_headers )
     return content
 
+def get_useful_data(tweets):
+    data = list()
+
+    for tweet in tweets:
+        data.append(tweet)
+
+    return data
+
 @app.route('/twitter-crawler', methods=['GET'])
 def twitter_crawler():
     """
-        Handle the SMS when is coming and save it in Firebase
+        Endpoint called by Google App Engine
+        Schecule task who crawl twitter to get my last tweet (media)
     """
+    tweets = list() # set the variable
 
-    home_timeline = oauth_req(
+    user_timeline = oauth_req(
         'https://api.twitter.com/1.1/statuses/user_timeline.json',
         app.config['ACCESS_TOKEN'],
         app.config['ACCESS_TOKEN_SECRET']
     )
+
+    try:
+        tweets = json.loads(user_timeline)
+    except Exception, e:
+        logging.info('Impossible de parser la reponse de twitter')
+        logging.info(user_timeline)
+
+
 
     logging.info(home_timeline)
     resp = make_response(home_timeline, 200)

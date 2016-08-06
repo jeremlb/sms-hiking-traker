@@ -1,38 +1,155 @@
 html, body {
-	height: 100%;
-	width: 100%;
+    width: 100%;
+    height: 100%;
 }
 
 header {
-    position: relative;
     overflow: hidden;
+    height: 65px;
+    padding: 15px;
 }
 
-
 header h1 {
- font-size: 1.4em;
+    font-size: 1.4em;
+    display: inline-block;
+    width: 320px;
+    vertical-align: top;
+}
+
+header nav {
+    display: inline-block;
 }
 
 .main {
     position: absolute;
-    bottom: 0;
-    top: 68px;
-    left: 0;
+    top: 65px;
     right: 0;
+    bottom: 0;
+    left: 0;
+    overflow: hidden;
 }
 
 .map, .menu {
-    height: 100%;
     display: inline-block;
+    height: 100%;
 }
 
 .menu {
     width: 340px;
     margin-right: -5px;
+    background-color: rgb(250, 250, 250);
+    position: relative;
+    background-color: 2px solid #bbb;
 }
 
 .map {
-    width: calc(100% - 339px);
     display: inline-block;
+    width: calc(100% - 339px);
     margin-right: -1px;
+}
+
+.menu nav {
+    position: absolute;
+    width: 100%;
+    height: 110px;
+    border-bottom: 1px solid #ddd;
+}
+
+.menu nav .checkboxes {
+    margin-top: 15px;
+}
+
+.menu nav .album-button {
+    width: 100%;
+}
+
+.menu .list-container, .menu .detail-container {
+    position: absolute;
+    top: 110px;
+    bottom: 0;
+    width: 100%;
+    overflow: scroll;
+
+    font-size: 0.9em;
+    font-family: 'Roboto', 'Arial', 'sans-serif';
+}
+
+.menu .detail-container {
+    /*display: none;*/
+}
+
+.menu .list-container {
+    display: none;
+}
+
+.menu .item {
+    position: relative;
+    padding: 16px;
+    padding-bottom: 0;
+}
+
+.menu .item:hover, .menu .item-selected {
+    background-color: rgba(238, 238, 238, 0.3);
+    cursor: pointer;
+}
+
+.menu .item-header {
+    position: relative;
+    height: 30px;
+}
+
+.menu .item-date {
+    display: inline-block;
+    padding-top: 6px;
+    font-weight: lighter;
+}
+
+.menu .item-icons {
+    display: inline-block;
+    position: absolute;
+    right: 0;
+    height: 100%;
+}
+
+.menu .item-icons img {
+    display: inline-block;
+    height: 100%;
+    padding: 5px;
+    margin-left: 10px;
+    border-radius: 15px;
+    box-shadow: 1px 1px 1px 0px rgba(0,0,0,0.4);
+}
+
+.menu .item-message {
+    margin-top: 10px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(150,150,150,0.2);
+    text-align: justify;
+}
+
+.menu .item:last-child .item-message {
+    border: none;
+}
+
+/* detail container */
+
+
+.menu .detail-container .item-sub-header {
+
+    text-transform: uppercase;
+    font-weight: lighter;
+    margin-bottom: 10px;
+    font-size: 0.8em;
+}
+
+.menu .detail-container .item {
+    background-color: rgba(238, 238, 238, 0.3);
+    cursor: default;
+}
+
+.menu .detail-container .item-photos img {
+    max-height: 270px;
+    margin: 0 auto;
+    margin-bottom: 15px;
+    border: 1px solid #bbb;
 }

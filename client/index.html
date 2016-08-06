@@ -19,20 +19,40 @@
 		<!-- endbuild -->
 	</head>
 	<body data-deferred-cloak>
-		<header class="bgc-indigo-500 tc-white-1 p+" flex-container="row" flex-column="12">
-			<div flex-item="3">
-				<h1>Jerem sur la route</h1>
-			</div>
-		    <nav flex-item>
+		<header class="bgc-indigo-500 tc-white-1 p+">
+			<h1>Jerem sur la route</h1>
+			<nav>
 				<a href="#/"><lx-button lx-type="flat" lx-color="white">Follow me !</lx-button></a>
 				<a href="#/about"><lx-button lx-type="flat" lx-color="white">A propos</lx-button></a>
 				<a href="#/contact"><lx-button lx-type="flat" lx-color="white">Contact</lx-button></a>
 			</nav>
 		</header>
 		<div class="main">
-			<ng-view ></ng-view>	
+			<ng-view ></ng-view>
 		</div>
 
+		<lx-dialog id="premiere-visite" lx-auto-close="false"
+		lx-escape-close="false">
+		    <lx-dialog-header>
+		        <div class="toolbar bgc-primary pl++">
+		            <span class="toolbar__label tc-white fs-title">
+		                Première visite ! :)
+		            </span>
+		        </div>
+		    </lx-dialog-header>
+
+		    <lx-dialog-content>
+		        <lx-tabs-panes>
+		            <lx-tab-pane>
+		                <p class="p++">Hello visiteur ! </p>
+		            </lx-tab-pane>
+		        </lx-tabs-panes>
+		    </lx-dialog-content>
+
+		    <lx-dialog-footer>
+		        <lx-button lx-type="flat" lx-dialog-close>Ok</lx-button>
+		    </lx-dialog-footer>
+		</lx-dialog>
 
 		<!-- build:js -->
 		<!-- endbuild -->

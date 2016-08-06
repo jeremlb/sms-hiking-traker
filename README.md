@@ -39,12 +39,14 @@ $ dev_appserver.py app.yaml # start the server on port 8080
 
 Set in Firebase your database rules to be read by anyone :
 
+```json
 {
   "rules": {
     ".read": "true",
     ".write": "auth != null"
   }
 }
+```
 
 ## Prepare for production
 

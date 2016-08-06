@@ -3,9 +3,12 @@
  * @type {angular.Module}
  */
 
-require('style!css!../css/style.css')
+// require('style!css!../css/style.css')
 
 var angular = require('angular');
+
+require('angular-touch');
+require('angular-carousel');
 
 var indexTemplate = require('ngtemplate!html!./views/app-index.html');
 var aboutTemplate = require('ngtemplate!html!./views/app-about.html');
@@ -14,14 +17,14 @@ var contactTemplate = require('ngtemplate!html!./views/app-contact.html');
 var module = angular.module('jerem-on-the-road', [
 	require('angular-route'),
 	require('angular-resource'),
+	require('angular-cookies'),
 	require('./vendors/gmaploader'),
 	require('./vendors/lumx'),
-	require('angularfire')
+	require('angularfire'),
+	'angular-carousel'
 ]);
 
 module.controller('AppCtrl', require('./controllers/appController'));
-// module.controller('AboutCtrl', require('./controllers/aboutController'));
-// module.controller('ContactCtrl', require('./controllers/contactController'));
 
 module.service('firebaseService', require('./services/firebaseService'));
 module.service('mapService', require('./services/mapService'));

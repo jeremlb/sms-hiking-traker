@@ -5,7 +5,11 @@ var webpack = require("webpack");
 var webpackConfig = require("./webpack.config.js");
 
 var files = {
-	css: ['/static/css/lumx.css']
+	css: [
+		'/static/css/lumx.css',
+		'/static/css/style.css',
+		'/static/css/angular-carousel.css'
+	]
 };
 
 // Include plugins
@@ -60,14 +64,22 @@ gulp.task('copy:fonts', function () {
 });
 
 gulp.task('css:dev', function () {
-	return gulp.src('bower_components/lumx/dist/lumx.css')
+	return gulp.src([
+				'bower_components/lumx/dist/lumx.css',
+				'node_modules/angular-carousel/dist/angular-carousel.css',
+				'client/css/*'
+			])
 			.pipe(plugins.replace(/url\(.\//g, 'url(..\/'))
-			.pipe(plugins.csscomb())
+			// .pipe(plugins.csscomb())
 			.pipe(gulp.dest('./.build/css'));
 });
 
 gulp.task('css:prod', function () {
-	return gulp.src('bower_components/lumx/dist/lumx.css')
+	return gulp.src([
+					'bower_components/lumx/dist/lumx.css',
+					'node_modules/angular-carousel/dist/angular-carousel.css',
+					'client/css/*'
+				])
       		   .pipe(plugins.autoprefixer())
 			   .pipe(plugins.replace(/url\(.\//g, 'url(..\/'))
 	  		   .pipe(plugins.concat('main.min.css'))
@@ -91,7 +103,7 @@ gulp.task('symlink', function (callback) {
 });
 
 gulp.task('img:dev', function() {
-    return gulp.src('client/img/*')
+    return gulp.src('client/img/**/*')
     .pipe(gulp.dest('.build/img'));
 });
 
