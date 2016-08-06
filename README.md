@@ -82,13 +82,22 @@ from .prod import *
 ```python
 # prod.py
 
+# Firebase
 FIREBASE_PROJECT = 'https://YOUR_FIREBASE_ID.firebaseio.com/'
 FIREBASE_SECRET = 'YOUR_FIREBASE_SECRET'
 
+# Twilio
 ACCOUNT_SID = "YOUR_TWILIO_SID"
 AUTH_TOKEN = "YOUR_TWILIO_TOKEN"
-
 MY_PHONE_NUMBER = 'YOUR_PHONE_NUMBER' # Example : +33611223344
+
+
+# Twitter
+CONSUMER_KEY        = 'YOUR_CONSUMER_KEY'
+CONSUMER_SECRET     = 'YOUR_CONSUMER_SECRET'
+ACCESS_TOKEN        = 'YOUR_ACCESS_TOKEN'
+ACCESS_TOKEN_SECRET = 'YOUR_ACCESS_TOKEN_SECRET'
+
 ```
 
 You also have to change configuration in client/js/app.js :
@@ -96,6 +105,8 @@ You also have to change configuration in client/js/app.js :
 
 Change configuration in client/js/controllers/appController.js :
     Firebase key : generate your own
+
+Create a twitter application and generate project tokens and access_token with your account.
 
 ## Licence
 
