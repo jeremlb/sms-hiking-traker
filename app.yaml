@@ -7,9 +7,9 @@ handlers:
 - url: /static
   static_dir: server/static
 
-- url: /dev
-  script: server.dev.app
-  secure: always
+- url: /twitter-crawler
+  script: server.main.app
+  login: admin
 
 - url: /.*
   script: server.main.app

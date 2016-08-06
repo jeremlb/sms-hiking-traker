@@ -1,0 +1,7 @@
+cron:
+- description: Crawl Twitter user_timeline and save medias urls
+  url: /twitter-crawler
+  schedule: every 6 hours
+  retry_parameters:
+    min_backoff_seconds: 2.5
+    max_doublings: 5

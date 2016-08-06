@@ -19,4 +19,4 @@ echo "======= Development libs install (NPM) ======"
 npm i --env=dev
 
 echo "======= Prepararing application in DEV MODE ======"
-npm run dev
+npm run build:dev

@@ -9,6 +9,7 @@ def init_app(appli):
 
     from .index import *
     from .handle_sms import *
+    from .twitter_crawler import *
 
 
     # import blueprint

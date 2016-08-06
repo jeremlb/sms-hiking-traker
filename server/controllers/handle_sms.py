@@ -10,8 +10,6 @@ from twilio import twiml
 from firebase import Firebase
 from firebase_token_generator import create_token
 
-from google.appengine.api import urlfetch
-
 def get_content(message, next_id):
     """
     Parse the SMS content and format to be save in Firebase
@@ -30,7 +28,8 @@ def get_content(message, next_id):
             'longitude': float(content[0].split(',')[1]),
             'weather': content[1],
             'type': content[2],
-            'message': content[3]
+            'message': content[3],
+            'photos': list()
         }
 
     except Exception, e:
@@ -64,7 +63,7 @@ def smsReciever():
     token = create_token(current_app.config['FIREBASE_SECRET'] , auth_payload)
 
     FIREBASE_PROJECT = current_app.config['FIREBASE_PROJECT']
-    firebase = Firebase(FIREBASE_PROJECT + '/point.json', token)
+    firebase = Firebase(FIREBASE_PROJECT, token)
 
     # Get the message
     if request.form.has_key('Body'):
