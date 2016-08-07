@@ -7,8 +7,7 @@ var webpackConfig = require("./webpack.config.js");
 var files = {
 	css: [
 		'/static/css/lumx.css',
-		'/static/css/style.css',
-		'/static/css/angular-carousel.css'
+		'/static/css/style.css'
 	]
 };
 
@@ -66,7 +65,6 @@ gulp.task('copy:fonts', function () {
 gulp.task('css:dev', function () {
 	return gulp.src([
 				'bower_components/lumx/dist/lumx.css',
-				'node_modules/angular-carousel/dist/angular-carousel.css',
 				'client/css/*'
 			])
 			.pipe(plugins.replace(/url\(.\//g, 'url(..\/'))
@@ -77,7 +75,6 @@ gulp.task('css:dev', function () {
 gulp.task('css:prod', function () {
 	return gulp.src([
 					'bower_components/lumx/dist/lumx.css',
-					'node_modules/angular-carousel/dist/angular-carousel.css',
 					'client/css/*'
 				])
       		   .pipe(plugins.autoprefixer())
@@ -108,7 +105,7 @@ gulp.task('img:dev', function() {
 });
 
 gulp.task('img:prod', function() {
-    return gulp.src('client/img/*')
+    return gulp.src('client/img/**/*')
     .pipe(plugins.imagemin({ progressive: true }))
     .pipe(gulp.dest('.build/img'));
 });
