@@ -100,6 +100,7 @@ CONSUMER_SECRET     = 'YOUR_CONSUMER_SECRET'
 ACCESS_TOKEN        = 'YOUR_ACCESS_TOKEN'
 ACCESS_TOKEN_SECRET = 'YOUR_ACCESS_TOKEN_SECRET'
 
+MATCH_HASHTAG = 'YOUR_HASHTAG' 
 ```
 
 You also have to change configuration in client/js/app.js :

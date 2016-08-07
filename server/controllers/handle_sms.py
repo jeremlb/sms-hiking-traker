@@ -3,12 +3,38 @@ from flask import current_app, request
 
 import logging
 import json
+from datetime import date
 
 from . import app
 
 from twilio import twiml
 from firebase import Firebase
 from firebase_token_generator import create_token
+
+WEATHER = {
+    'sunny': 'clear-day',
+    'clear-night': 'clear-night',
+    'cloudy': 'cloudy-weather',
+    'hazy': 'haze-weather', # brouillard
+    'most-cloudy-day': 'most-cloudy',
+    'most-cloudy-night': 'most-cloudy-night',
+    'rain-snow': 'rain-snow',
+    'rainy': 'rainy-weather',
+    'showcase': 'showcase',
+    'snowy': 'snow-weather',
+    'storm': 'storm-weather',
+    'thunder': 'thunder-weather',
+    'unknown': 'unknown',
+    'windy': 'windy-weather',
+}
+
+BREAK = ['eat', 'camp', 'break', 'arrived', 'start']
+
+# for firebase
+ROOT_OBJECT      = app.config['ROOT_OBJECT']
+FIREBASE_PROJECT = app.config['FIREBASE_PROJECT']
+FIREBASE_SECRET  = app.config['FIREBASE_SECRET']
+AUTH_PAYLOAD = app.config['AUTH_PAYLOAD']
 
 def get_content(message, next_id):
     """
@@ -22,14 +48,19 @@ def get_content(message, next_id):
     try:
         content = message.split(' - ')
 
+        weather = WEATHER[content[1].lower()]
+
+        if content[2].lower() not in BREAK:
+            raise Exception('Not in break type')
+
         return {
             'id': next_id,
+            'date': date.today().strftime("%d/%m/%Y"),
             'latitude': float(content[0].split(',')[0]),
             'longitude': float(content[0].split(',')[1]),
-            'weather': content[1],
-            'type': content[2],
-            'message': content[3],
-            'photos': list()
+            'weather': weather,
+            'break': content[2].lower(),
+            'message': content[3]
         }
 
     except Exception, e:
@@ -59,11 +90,10 @@ def smsReciever():
         return str(r)
 
     # initiate the connexion to Firebase
-    auth_payload = {"uid": "1", "auth_data": "foo", "other_auth_data": "bar"}
-    token = create_token(current_app.config['FIREBASE_SECRET'] , auth_payload)
+    token = create_token(FIREBASE_SECRET , AUTH_PAYLOAD)
 
-    FIREBASE_PROJECT = current_app.config['FIREBASE_PROJECT']
-    firebase = Firebase(FIREBASE_PROJECT, token)
+    firebase_project = FIREBASE_PROJECT + '/' + ROOT_OBJECT + '.json'
+    firebase = Firebase(firebase_project, token)
 
     # Get the message
     if request.form.has_key('Body'):
@@ -71,6 +101,7 @@ def smsReciever():
 
         # Get the next firebase Id and parse the content to firebase
         next_id = get_next_id(firebase)
+
         content = get_content(body, next_id)
 
         # saved the content in firebase
