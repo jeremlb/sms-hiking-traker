@@ -1,27 +1,35 @@
 var angular = require('angular');
 
-module.exports = [function () {
+module.exports = ['uiEventsService', 'pointsService', '$scope', 'mapService',
+          function (uiEventsService, pointsService, $scope, mapService) {
 
      var _this = this;
 
-     this.items = [{
-          date: '06/08/2016',
-          weather: '/static/img/weather/clear-night.png',
-          breakType: '/static/img/weather/unknown.png',
-          message: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam animi hic earum obcaecati fuga qui ut nobis suscipit magni asperiores magnam iste corporis minima doloribus, tempora fugiat, pariatur repellat! Soluta.',
-          photos: [{url: '/static/img/tmp/1.jpg'}],
-          videos: [{url: 'https://video.twimg.com/ext_tw_video/761828795003375617/pu/vid/180x320/u8R217RCXCPq_AKY.mp4'}]
-     }];
-
      this.isDetailShown = false;
      this.detailItem = {};
+     this.items = pointsService.getPoints();
+
+     uiEventsService.setPanelListener(function (key) {
+          _this.detailItem = pointsService.getPoint(key);
+          _this.isDetailShown = true;
+          $scope.$apply();
+     });
+
+     uiEventsService.setUiListener(function () {
+          _this.items = pointsService.getPoints();
+     });
 
      this.showDetail = function (item) {
-          _this.isDetailShown = true;
           _this.detailItem = item;
+          _this.isDetailShown = true;
+
+          if(item.marker) {
+               mapService.focusMarker(item.marker);
+          }
      };
 
      this.hideDetail = function () {
           _this.isDetailShown = false;
+          mapService.showMarkers();
      };
 }];

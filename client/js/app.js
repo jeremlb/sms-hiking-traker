@@ -24,6 +24,8 @@ module.controller('AppCtrl', require('./controllers/appController'));
 module.controller('PanelCtrl', require('./controllers/panelController'));
 
 module.service('firebaseService', require('./services/firebaseService'));
+module.service('pointsService', require('./services/pointsService'));
+module.service('uiEventsService', require('./services/uiEventsService'));
 module.service('mapService', require('./services/mapService'));
 module.service('photosService', require('./services/photosService'));
 module.service('mapManagerService', require('./services/mapManagerService'));

@@ -52,7 +52,9 @@ def get_useful_data(tweets):
     data = list()
 
     for tweet in tweets:
-        data.append(tweet)
+        data.append({
+
+        })
 
     return data
 
@@ -77,8 +79,6 @@ def twitter_crawler():
         logging.info(user_timeline)
 
 
-
-    logging.info(home_timeline)
-    resp = make_response(home_timeline, 200)
+    resp = make_response(user_timeline, 200)
     resp.headers['Content-Type'] = 'application/json'
     return resp

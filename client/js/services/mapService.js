@@ -1,13 +1,15 @@
 var angular = require('angular');
 
-module.exports = ['mapManagerService', function (mapManagerService) {
+module.exports = ['mapManagerService', 'uiEventsService',
+        function (mapManagerService, uiEventsService) {
     var service = {};
 
     var service = {
         onResume: onResume,
         addMarker: addMarker,
-        deleteMarker: deleteMarker,
-        refreshMarkers: refreshMarkers,
+        removeMarker: removeMarker,
+        focusMarker: focusMarker,
+        showMarkers: showMarkers
     };
 
     var _map = null;
@@ -40,12 +42,18 @@ module.exports = ['mapManagerService', function (mapManagerService) {
 
     function initMap() {}
 
-    function addMarker(point) {
+    function addMarker(key, point) {
         var position = new google.maps.LatLng(point.latitude, point.longitude);
         var marker = new google.maps.Marker({
             position: position,
             map: _map
         })
+
+        marker.set('point', key);
+
+        marker.addListener('click', function () {
+            uiEventsService.openPanel(this.get('point'));
+        });
 
         _markers.push(marker);
 
@@ -55,17 +63,23 @@ module.exports = ['mapManagerService', function (mapManagerService) {
             _bounds.extend(position);
         }
 
-        _map.fitBounds(_bounds);
+        showMarkers();
 
         return marker;
     }
 
-    function deleteMarker (point) {
-
+    function removeMarker (marker) {
+        marker.setMap(null);
+        return true;
     }
 
-    function refreshMarkers () {
+    function focusMarker(marker) {
+        _map.panTo(marker.getPosition());
+        _map.setZoom(15);
+    }
 
+    function showMarkers() {
+        _map.fitBounds(_bounds);
     }
 
     return service;

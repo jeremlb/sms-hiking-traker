@@ -4,8 +4,8 @@
         <div class="item-header">
             <div class="item-date">{{ item.date }}</div>
             <div class="item-icons">
-                <img ng-src="{{ item.weather }}" class="bgc-light-green-500">
-                <img ng-src="{{ item.breakType }}" class="bgc-light-green-500">
+                <img ng-src="{{ item.weather }}" lx-tooltip="Méteo" class="bgc-light-green-500">
+                <img ng-src="{{ item.breakType }}" lx-tooltip="Pause" class="bgc-light-green-500">
             </div>
         </div>
         <div class="item-message">
@@ -24,8 +24,8 @@
         <div class="item-header">
             <div class="item-date">{{ panelCtrl.detailItem.date }}</div>
             <div class="item-icons">
-                <img ng-src="{{ panelCtrl.detailItem.weather }}" class="bgc-light-green-500">
-                <img ng-src="{{ panelCtrl.detailItem.breakType }}" class="bgc-light-green-500">
+                <img ng-src="{{ panelCtrl.detailItem.weather }}" lx-tooltip="Méteo" class="bgc-light-green-500">
+                <img ng-src="{{ panelCtrl.detailItem.breakType }}" lx-tooltip="Pause" class="bgc-light-green-500">
             </div>
         </div>
         <div class="item-message" ng-show="panelCtrl.detailItem.message.length > 0">

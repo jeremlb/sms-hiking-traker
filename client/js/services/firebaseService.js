@@ -1,7 +1,9 @@
 var angular = require('angular');
 
-module.exports = ['$firebaseArray', 'mapService',
- 		function ($firebaseArray, mapService) {
+require('firebase/firebase');
+
+module.exports = ['$firebaseArray', 'mapManagerService', 'pointsService',
+ 		function ($firebaseArray, mapManagerService, pointsService) {
 
     var service = {
 		initFirebase: initFirebase
@@ -18,24 +20,31 @@ module.exports = ['$firebaseArray', 'mapService',
 	 var points = null;
 
 	 function initFirebase () {
-		 if(refs === null) {
-			 firebase.initializeApp(config);
 
-			 refs = firebase.database().ref().child('point');
+		 // if the connexion is bad the could be generate an error
+		 // if maps is not loaded
+		 mapManagerService.onReady().then(function () {
+			 var marker = null;
 
-			 points = $firebaseArray(refs);
-			 points.$watch(function(event) {
-				 if(event.event === 'child_added') {
-					 mapService.addMarker(points.$getRecord(event.key));
-				 } else if(event.event === 'child_removed') {
-					 mapService.removeMarker(points.$getRecord(event.key));
-				 } else if(event.event === 'child_updated') {
-					 mapService.updateMarker(points.$getRecord(event.key));
-				 }
-			 });
-		 } else {
-			 mapService.refreshMarkers();
-		 }
+			 if(refs === null) {
+				 firebase.initializeApp(config);
+
+				 refs = firebase.database().ref().child('point');
+				 points = $firebaseArray(refs);
+
+				 points.$watch(function(event) {
+					 if(event.event === 'child_added') {
+						 pointsService.addPoint(event.key,
+							 					points.$getRecord(event.key))
+					 } else if(event.event === 'child_removed') {
+						 pointsService.removePoint(points.$getRecord(event.key));
+					 } else if(event.event === 'child_updated') {
+						 pointsService.updatePoint(event.key,
+							 					   points.$getRecord(event.key));
+					 }
+				 });
+			 }
+		 });
 	 }
 
     return service;
