@@ -87,6 +87,9 @@ from .prod import *
 # Firebase
 FIREBASE_PROJECT = 'https://YOUR_FIREBASE_ID.firebaseio.com/'
 FIREBASE_SECRET = 'YOUR_FIREBASE_SECRET'
+AUTH_PAYLOAD  = 'YOUR_AUTH_PAYLOAD'
+# For example {"uid": "1", "auth_data": "foo", "other_auth_data": "bar"}
+ROOT_OBJECT = 'YOUR_ROOT_OBJECT'
 
 # Twilio
 ACCOUNT_SID = "YOUR_TWILIO_SID"
@@ -100,7 +103,7 @@ CONSUMER_SECRET     = 'YOUR_CONSUMER_SECRET'
 ACCESS_TOKEN        = 'YOUR_ACCESS_TOKEN'
 ACCESS_TOKEN_SECRET = 'YOUR_ACCESS_TOKEN_SECRET'
 
-MATCH_HASHTAG = 'YOUR_HASHTAG' 
+MATCH_HASHTAG = 'YOUR_HASHTAG'
 ```
 
 You also have to change configuration in client/js/app.js :
@@ -110,6 +113,15 @@ Change configuration in client/js/controllers/appController.js :
     Firebase key : generate your own
 
 Create a twitter application and generate project tokens and access_token with your account.
+
+## Cron
+
+A cron is called every two hour to crawl my twitter timeline and match sms message
+to tweet (photo and video).
+
+To match I made a format based on sms record id (send by the server) and a hashtag.
+
+The cron is defined in cron.yaml
 
 ## Licence
 
