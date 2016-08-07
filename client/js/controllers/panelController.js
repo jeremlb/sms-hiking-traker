@@ -40,9 +40,9 @@ module.exports = ['uiEventsService', 'pointsService', '$scope', 'mapService',
      };
 
      this.getBreakIconUrl = function (item) {
-          if(item.weather) {
+          if(item.break) {
                // TODO: change to break icon
-               return '/static/img/weather/' + item.weather + '.png';
-          }     
+               return '/static/img/break/' + item.break + '.png';
+          }
      };
 }];

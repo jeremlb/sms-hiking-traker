@@ -15,6 +15,7 @@ module.exports = ['mapManagerService', 'uiEventsService',
     var _map = null;
     var _markers = [];
     var _bounds = null;
+    var _this = this;
 
     function onCreate() {
         mapManagerService.onReady().then(function () {
@@ -46,6 +47,7 @@ module.exports = ['mapManagerService', 'uiEventsService',
         var position = new google.maps.LatLng(point.latitude, point.longitude);
         var marker = new google.maps.Marker({
             position: position,
+            icon: '/static/img/marker/marker-' + point.break + '.png',
             map: _map
         })
 
@@ -53,6 +55,7 @@ module.exports = ['mapManagerService', 'uiEventsService',
 
         marker.addListener('click', function () {
             uiEventsService.openPanel(this.get('point'));
+            focusMarker(this);
         });
 
         _markers.push(marker);
