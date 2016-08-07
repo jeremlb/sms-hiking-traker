@@ -32,4 +32,17 @@ module.exports = ['uiEventsService', 'pointsService', '$scope', 'mapService',
           _this.isDetailShown = false;
           mapService.showMarkers();
      };
+
+     this.getWeatherIconUrl = function (item) {
+          if(item.weather) {
+               return '/static/img/weather/' + item.weather + '.png';
+          }
+     };
+
+     this.getBreakIconUrl = function (item) {
+          if(item.weather) {
+               // TODO: change to break icon
+               return '/static/img/weather/' + item.weather + '.png';
+          }     
+     };
 }];

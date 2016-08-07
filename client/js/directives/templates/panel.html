@@ -4,8 +4,10 @@
         <div class="item-header">
             <div class="item-date">{{ item.date }}</div>
             <div class="item-icons">
-                <img ng-src="{{ item.weather }}" lx-tooltip="Méteo" class="bgc-light-green-500">
-                <img ng-src="{{ item.breakType }}" lx-tooltip="Pause" class="bgc-light-green-500">
+                <img ng-src="{{ panelCtrl.getWeatherIconUrl(item) }}"
+                lx-tooltip="Méteo" class="bgc-light-green-500">
+                <img ng-src="{{ panelCtrl.getBreakIconUrl(item) }}"
+                lx-tooltip="Pause" class="bgc-light-green-500">
             </div>
         </div>
         <div class="item-message">
@@ -24,8 +26,10 @@
         <div class="item-header">
             <div class="item-date">{{ panelCtrl.detailItem.date }}</div>
             <div class="item-icons">
-                <img ng-src="{{ panelCtrl.detailItem.weather }}" lx-tooltip="Méteo" class="bgc-light-green-500">
-                <img ng-src="{{ panelCtrl.detailItem.breakType }}" lx-tooltip="Pause" class="bgc-light-green-500">
+                <img ng-src="{{ panelCtrl.getWeatherIconUrl(panelCtrl.detailItem) }}"
+                lx-tooltip="Méteo" class="bgc-light-green-500">
+                <img ng-src="{{ panelCtrl.getBreakIconUrl(panelCtrl.detailItem) }}"
+                lx-tooltip="Pause" class="bgc-light-green-500">
             </div>
         </div>
         <div class="item-message" ng-show="panelCtrl.detailItem.message.length > 0">
@@ -42,8 +46,8 @@
             <div class="item-sub-header">VIDEOS</div>
             <div ng-repeat="video in panelCtrl.detailItem.videos">
                 <video width="308" height="240" controls>
-                    <source ng-src="{{ video.url }}"
-                    type="video/mp4">
+                    <source ng-src="{{ format.url }}" type="{{ format.content_type }}"
+                    ng-repeat="format in video.format">
                     Your browser does not support the video tag.
                 </video>
             </div>
