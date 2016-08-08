@@ -1,20 +1,20 @@
 var angular = require('angular');
 
-module.exports = [function () {
+module.exports = ['$rootScope', function ($rootScope) {
     var service = {
-        setUiListener: setUiListener,
+        addUiListener: addUiListener,
         setPanelListener: setPanelListener,
 
         openPanel: openPanel,
         refreshUi: refreshUi
     };
 
-    var _uiListener = null; // to refresh ui
+    var _uiListeners = []; // to refresh ui
     var _panelListener = null; // to open detail panel
 
-    function setUiListener(callback) {
+    function addUiListener(callback) {
         if(typeof callback === 'function') {
-            _uiListener = callback;
+            _uiListeners.push(callback);
         }
     }
 
@@ -25,8 +25,8 @@ module.exports = [function () {
     }
 
     function refreshUi() {
-        if(_uiListener !== null) {
-            _uiListener.call(null);
+        for(var i = 0; i < _uiListeners.length; i+= 1) {
+            _uiListeners[i].call(null);
         }
     }
 
@@ -37,6 +37,13 @@ module.exports = [function () {
             _panelListener.call(null, key);
         }
     }
+
+    // when route change remove ui listener destroy when app not displayed
+    $rootScope.$on('$routeChangeStart', function (event) {
+        // reset listeners
+        _uiListeners = [];
+        _panelListener = null;
+    });
 
     return service;
 }];

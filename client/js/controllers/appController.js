@@ -1,9 +1,9 @@
 var angular = require('angular');
 
-module.exports = ['firebaseService', 'photosService',  'mapService',
-     'LxDialogService', '$cookies',
-		function (firebaseService, photosService, mapService,
-          LxDialogService, $cookies) {
+module.exports = ['firebaseService',  'mapService',
+     'LxDialogService', '$cookies', 'uiEventsService',
+		function (firebaseService, mapService,
+          LxDialogService, $cookies, uiEventsService) {
 
      var _this = this;
 
@@ -15,11 +15,11 @@ module.exports = ['firebaseService', 'photosService',  'mapService',
      this.dialogId = 'album-1';
      this.openAlbum = function () {
           LxDialogService.open(_this.dialogId);
-     }
+     };
 
      this.closeAlbum = function () {
           LxDialogService.close(_this.dialogId);
-     }
+     };
 
      // open a dialog when it's the first visit and set a cookie
      if($cookies.get('4d7b7ef4-5be4') === undefined) {

@@ -15,7 +15,7 @@ module.exports = ['uiEventsService', 'pointsService', '$scope', 'mapService',
           $scope.$apply();
      });
 
-     uiEventsService.setUiListener(function () {
+     uiEventsService.addUiListener(function () {
           _this.items = pointsService.getPoints();
      });
 

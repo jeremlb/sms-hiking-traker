@@ -1,7 +1,7 @@
 var angular = require('angular');
 
-module.exports = ['mapManagerService', 'uiEventsService',
-        function (mapManagerService, uiEventsService) {
+module.exports = ['mapManagerService', 'uiEventsService', '$timeout',
+        function (mapManagerService, uiEventsService, $timeout) {
     var service = {};
 
     var service = {
@@ -55,7 +55,10 @@ module.exports = ['mapManagerService', 'uiEventsService',
     }
 
     function initMap() {
-        showMarkers();
+        $timeout(function () {
+            showMarkers();
+        }, 100);
+
     }
 
     function getUrlIcon(breakType) {
@@ -74,7 +77,7 @@ module.exports = ['mapManagerService', 'uiEventsService',
             map: _map
         });
 
-        marker.set('point', options.key);
+        marker.set('point', key);
 
         marker.addListener('click', function () {
             uiEventsService.openPanel(this.get('point'));
@@ -88,6 +91,7 @@ module.exports = ['mapManagerService', 'uiEventsService',
         } else {
             _bounds.extend(position);
         }
+
 
         showMarkers();
 
