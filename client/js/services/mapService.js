@@ -41,7 +41,9 @@ module.exports = ['mapManagerService', 'uiEventsService',
         }
     }
 
-    function initMap() {}
+    function initMap() {
+        showMarkers();
+    }
 
     function addMarker(key, point) {
         var position = new google.maps.LatLng(point.latitude, point.longitude);
@@ -82,7 +84,9 @@ module.exports = ['mapManagerService', 'uiEventsService',
     }
 
     function showMarkers() {
-        _map.fitBounds(_bounds);
+        if(_bounds !== null) {
+            _map.fitBounds(_bounds);
+        }
     }
 
     return service;
