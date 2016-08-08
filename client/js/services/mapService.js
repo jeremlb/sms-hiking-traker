@@ -7,6 +7,7 @@ module.exports = ['mapManagerService', 'uiEventsService',
     var service = {
         onResume: onResume,
         addMarker: addMarker,
+        updateMarker: updateMarker,
         removeMarker: removeMarker,
         focusMarker: focusMarker,
         showMarkers: showMarkers
@@ -41,19 +42,39 @@ module.exports = ['mapManagerService', 'uiEventsService',
         }
     }
 
+    function updateMarker(marker, options) {
+        var position = new google.maps.LatLng(
+            options.latitude,
+            options.longitude
+        );
+
+        marker.setOptions({
+            position: position,
+            icon: getUrlIcon(options.icon)
+        });
+    }
+
     function initMap() {
         showMarkers();
     }
 
-    function addMarker(key, point) {
-        var position = new google.maps.LatLng(point.latitude, point.longitude);
+    function getUrlIcon(breakType) {
+        return '/static/img/marker/marker-' + breakType + '.png';
+    }
+
+    function addMarker(key, options) {
+        var position = new google.maps.LatLng(
+            options.latitude,
+            options.longitude
+        );
+
         var marker = new google.maps.Marker({
             position: position,
-            icon: '/static/img/marker/marker-' + point.break + '.png',
+            icon: getUrlIcon(options.icon),
             map: _map
-        })
+        });
 
-        marker.set('point', key);
+        marker.set('point', options.key);
 
         marker.addListener('click', function () {
             uiEventsService.openPanel(this.get('point'));

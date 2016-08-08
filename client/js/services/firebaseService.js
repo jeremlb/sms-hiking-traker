@@ -24,13 +24,12 @@ module.exports = ['$firebaseArray', 'mapManagerService', 'pointsService',
 		 // if the connexion is bad the could be generate an error
 		 // if maps is not loaded
 		 mapManagerService.onReady().then(function () {
-			 var marker = null;
-
 			 if(refs === null) {
 				 firebase.initializeApp(config);
 
 				 refs = firebase.database().ref().child('point');
 				 points = $firebaseArray(refs);
+
 
 				 points.$watch(function(event) {
 					 if(event.event === 'child_added') {
@@ -38,7 +37,7 @@ module.exports = ['$firebaseArray', 'mapManagerService', 'pointsService',
 							 					points.$getRecord(event.key))
 					 } else if(event.event === 'child_removed') {
 						 pointsService.removePoint(points.$getRecord(event.key));
-					 } else if(event.event === 'child_updated') {
+					 } else if(event.event === 'child_changed') {
 						 pointsService.updatePoint(event.key,
 							 					   points.$getRecord(event.key));
 					 }

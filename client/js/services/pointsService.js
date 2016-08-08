@@ -13,10 +13,23 @@ module.exports = ['mapService', 'uiEventsService',
     var _points = {};   // models shared in the all application
 
     function addPoint(key, point) {
-        var marker = mapService.addMarker(key, point);
+        _points[key] = {
+            id: point.id,
+            latitude: point.latitude,
+            longitude: point.longitude,
+            message: point.message,
+            break: point.break,
+            weather: point.weather,
+            date: point.date,
+            photos: (point.photos)? point.photos: undefined,
+            videos: (point.videos)? point.videos: undefined
+        };
 
-        point.marker = marker;
-        _points[key] = point;
+        _points[key].marker = mapService.addMarker(key, {
+            latitude: point.latitude,
+            longitude: point.longitude,
+            icon:  point.break
+        });
 
         uiEventsService.refreshUi();
     }
@@ -25,16 +38,34 @@ module.exports = ['mapService', 'uiEventsService',
         if(_points.hasOwnProperty(key)) {
             mapService.removeMarker(_points[key].marker);
             delete _points[key];
+            uiEventsService.refreshUi();
             return true;
         }
 
-
-        uiEventsService.refreshUi();
         return false;
     }
 
-    function updatePoint(key, point) {
-        //TODO: add update support
+    function updatePoint(key, new_point) {
+        var point = getPoint(key);
+
+        if(point) {
+            point.id =  new_point.id,
+            point.latitude  = new_point.latitude;
+            point.longitude = new_point.longitude;
+            point.message = new_point.message;
+            point.break   = new_point.break;
+            point.weather = new_point.weather;
+            point.date   = new_point.date;
+            point.photos =  (new_point.photos)? new_point.photos: undefined;
+            point.videos =  (new_point.videos)? new_point.videos: undefined;
+
+            mapService.updateMarker(point.marker, {
+                latitude: point.latitude,
+                longitude: point.longitude,
+                icon:  point.break
+            });
+        }
+
         uiEventsService.refreshUi();
     }
 
