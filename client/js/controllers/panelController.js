@@ -11,9 +11,12 @@ module.exports = ['uiEventsService', 'pointsService', '$scope', 'mapService',
      this.items = pointsService.getPoints();
 
      uiEventsService.setPanelListener(function (key) {
-          _this.detailItem = pointsService.getPoint(key);
-          _this.isDetailShown = true;
-          $scope.$apply();
+		_this.detailItem = pointsService.getPoint(key);
+        _this.isDetailShown = true;
+		
+		if(!$scope.$$phase) {
+			$scope.$apply();
+		}
      });
 
      uiEventsService.addUiListener(function () {

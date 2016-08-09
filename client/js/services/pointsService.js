@@ -14,6 +14,7 @@ module.exports = ['mapService', 'uiEventsService',
 
     function addPoint(key, point) {
         _points[key] = {
+			key: key,
             id: point.id,
             latitude: point.latitude,
             longitude: point.longitude,
@@ -49,7 +50,7 @@ module.exports = ['mapService', 'uiEventsService',
         var point = getPoint(key);
 
         if(point) {
-            point.id =  new_point.id,
+            point.id =  new_point.id;
             point.latitude  = new_point.latitude;
             point.longitude = new_point.longitude;
             point.message = new_point.message;

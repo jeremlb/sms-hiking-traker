@@ -129,7 +129,7 @@ gulp.task('replace:prod', function () {
 		.pipe(gulp.dest('server/templates'));
 });
 
-gulp.task('clean:all', ['clean', 'symlink'])
+gulp.task('clean:all', ['clean', 'symlink']);
 
 gulp.task("build:dev", ['clean:all'], function () {
 	gulp.start("webpack:dev");
@@ -151,4 +151,4 @@ gulp.task("build:prod", ['clean:all'], function () {
 gulp.task('watch', ['build:dev'], function () {
 	gulp.watch('client/css/**/*.css', ['css:dev']);
 	gulp.watch('client/js/**/*.js', ['webpack:dev']);
-})
+});
