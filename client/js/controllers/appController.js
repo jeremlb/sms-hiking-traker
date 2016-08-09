@@ -10,13 +10,15 @@ module.exports = ['firebaseService',  'mapService',
      var _show_progress = true;
 
      this.photos = [
-          ['http://pbs.twimg.com/media/CpWKxX8XgAAUF1s.jpg', 'http://pbs.twimg.com/media/CpWKxX8XgAAUF1s.jpg', 'http://pbs.twimg.com/media/CpWKxX8XgAAUF1s.jpg'],
-          ['http://pbs.twimg.com/media/CpWKxX8XgAAUF1s.jpg', 'http://pbs.twimg.com/media/CpWKxX8XgAAUF1s.jpg', 'http://pbs.twimg.com/media/CpWKxX8XgAAUF1s.jpg'],
-          ['http://pbs.twimg.com/media/CpWKxX8XgAAUF1s.jpg', 'http://pbs.twimg.com/media/CpWKxX8XgAAUF1s.jpg', 'http://pbs.twimg.com/media/CpWKxX8XgAAUF1s.jpg'],
-          ['http://pbs.twimg.com/media/CpWKxX8XgAAUF1s.jpg', 'http://pbs.twimg.com/media/CpWKxX8XgAAUF1s.jpg', 'http://pbs.twimg.com/media/CpWKxX8XgAAUF1s.jpg'],
-          ['http://pbs.twimg.com/media/CpWKxX8XgAAUF1s.jpg', 'http://pbs.twimg.com/media/CpWKxX8XgAAUF1s.jpg', 'http://pbs.twimg.com/media/CpWKxX8XgAAUF1s.jpg'],
-          ['http://pbs.twimg.com/media/CpWKxX8XgAAUF1s.jpg', 'http://pbs.twimg.com/media/CpWKxX8XgAAUF1s.jpg', 'http://pbs.twimg.com/media/CpWKxX8XgAAUF1s.jpg'],
-          ['http://pbs.twimg.com/media/CpWKxX8XgAAUF1s.jpg', 'http://pbs.twimg.com/media/CpWKxX8XgAAUF1s.jpg', 'http://pbs.twimg.com/media/CpWKxX8XgAAUF1s.jpg']
+          'http://pbs.twimg.com/media/CpWKxX8XgAAUF1s.jpg',
+          'http://pbs.twimg.com/media/CpWKxX8XgAAUF1s.jpg',
+          'http://pbs.twimg.com/media/CpWKxX8XgAAUF1s.jpg',
+          'http://pbs.twimg.com/media/CpWKxX8XgAAUF1s.jpg',
+          'http://pbs.twimg.com/media/CpWKxX8XgAAUF1s.jpg',
+          'http://pbs.twimg.com/media/CpWKxX8XgAAUF1s.jpg',
+          'http://pbs.twimg.com/media/CpWKxX8XgAAUF1s.jpg',
+          'http://pbs.twimg.com/media/CpWKxX8XgAAUF1s.jpg',
+          'http://pbs.twimg.com/media/CpWKxX8XgAAUF1s.jpg'
      ];
 
      // init

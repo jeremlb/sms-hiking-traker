@@ -42,10 +42,12 @@
     <lx-dialog-content>
         <lx-tabs-panes id="album-photo-video" class="album-dialog">
             <lx-tab-pane>
-                <div class="tc-white-1 p+" flex-container="row" flex-column="12" flex-gutter="24"
-                ng-repeat="photo in ctrl.photos">
-                    <div flex-item="4" ng-repeat="item in photo track by $index">
-                        <img ng-src="{{ item }}"/>
+                <div class="p">
+                    <div class="tc-white-1 album-photo-img-container" ng-repeat="photo in ctrl.photos track by $index">
+                        <img class="album-photo-img" ng-src="{{ photo }}"/>
+                        <div class="album-photo-img-hover">
+                            <a href=""></a>
+                        </div>
                     </div>
                 </div>
             </lx-tab-pane>

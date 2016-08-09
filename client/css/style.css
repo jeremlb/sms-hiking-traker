@@ -194,6 +194,20 @@ header nav {
     overflow: scroll;
 }
 
-.album-img {
-    ma
+.album-photo-img-container {
+    position: relative;
+    display: inline-block;
+    margin: 0 0.5%;
+    width: 24%;
+}
+
+.album-photo-img-hover:hover {
+    background-color: red;
+}
+
+.album-photo-img-hover {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
 }
