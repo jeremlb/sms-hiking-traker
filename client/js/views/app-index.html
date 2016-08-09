@@ -1,3 +1,4 @@
+<lx-progress lx-type="linear" lx-color="pink" ng-if="ctrl.showProgress()"></lx-progress>
 <div class="menu">
     <nav class="p+">
         <div class="album">
@@ -17,7 +18,7 @@
 </div>
 
 <!--  Album photo et video -->
-<lx-dialog id="{{ ctrl.dialogId }}">
+<lx-dialog id="{{ ctrl.dialogId }}" style="bottom:32px;">
     <lx-dialog-header>
         <div class="toolbar bgc-primary pl++">
             <span class="toolbar__label tc-white fs-title">
@@ -33,17 +34,19 @@
 
         <lx-tabs lx-panes-id="album-photo-video"
                  lx-links="[{label: 'Mes photos'}, {label: 'Mes vidéos'}]"
-
                  lx-theme="dark"
                  lx-color="primary"
-                 lx-indicator="light-green"></lx-tabs>
+                 lx-indicator="pink"></lx-tabs>
     </lx-dialog-header>
 
     <lx-dialog-content>
-        <lx-tabs-panes id="album-photo-video">
+        <lx-tabs-panes id="album-photo-video" class="album-dialog">
             <lx-tab-pane>
-                <div class="p++">
-                    <p>Mes photos</p>
+                <div class="tc-white-1 p+" flex-container="row" flex-column="12" flex-gutter="24"
+                ng-repeat="photo in ctrl.photos">
+                    <div flex-item="4" ng-repeat="item in photo track by $index">
+                        <img ng-src="{{ item }}"/>
+                    </div>
                 </div>
             </lx-tab-pane>
 

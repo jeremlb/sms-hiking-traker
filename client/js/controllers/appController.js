@@ -7,9 +7,29 @@ module.exports = ['firebaseService',  'mapService',
 
      var _this = this;
 
+     var _show_progress = true;
+
+     this.photos = [
+          ['http://pbs.twimg.com/media/CpWKxX8XgAAUF1s.jpg', 'http://pbs.twimg.com/media/CpWKxX8XgAAUF1s.jpg', 'http://pbs.twimg.com/media/CpWKxX8XgAAUF1s.jpg'],
+          ['http://pbs.twimg.com/media/CpWKxX8XgAAUF1s.jpg', 'http://pbs.twimg.com/media/CpWKxX8XgAAUF1s.jpg', 'http://pbs.twimg.com/media/CpWKxX8XgAAUF1s.jpg'],
+          ['http://pbs.twimg.com/media/CpWKxX8XgAAUF1s.jpg', 'http://pbs.twimg.com/media/CpWKxX8XgAAUF1s.jpg', 'http://pbs.twimg.com/media/CpWKxX8XgAAUF1s.jpg'],
+          ['http://pbs.twimg.com/media/CpWKxX8XgAAUF1s.jpg', 'http://pbs.twimg.com/media/CpWKxX8XgAAUF1s.jpg', 'http://pbs.twimg.com/media/CpWKxX8XgAAUF1s.jpg'],
+          ['http://pbs.twimg.com/media/CpWKxX8XgAAUF1s.jpg', 'http://pbs.twimg.com/media/CpWKxX8XgAAUF1s.jpg', 'http://pbs.twimg.com/media/CpWKxX8XgAAUF1s.jpg'],
+          ['http://pbs.twimg.com/media/CpWKxX8XgAAUF1s.jpg', 'http://pbs.twimg.com/media/CpWKxX8XgAAUF1s.jpg', 'http://pbs.twimg.com/media/CpWKxX8XgAAUF1s.jpg'],
+          ['http://pbs.twimg.com/media/CpWKxX8XgAAUF1s.jpg', 'http://pbs.twimg.com/media/CpWKxX8XgAAUF1s.jpg', 'http://pbs.twimg.com/media/CpWKxX8XgAAUF1s.jpg']
+     ];
+
      // init
      mapService.onResume(); // init the map when ready
-     firebaseService.initFirebase(); // init the firebase connexion
+
+     // init the firebase connexion
+     firebaseService.initFirebase().then(function () {
+          _show_progress = false;
+     });
+
+     this.showProgress = function () {
+          return _show_progress;
+     }
 
      // album dialog
      this.dialogId = 'album-1';

@@ -52,6 +52,10 @@ module.config(['$routeProvider', 'uiGmapGoogleMapApiProvider',
 			controller: 'AppCtrl as ctrl',
 			templateUrl: indexTemplate
 		})
+		.when('/detail/:id', {
+			controller: 'AppCtrl as ctrl',
+			templateUrl: indexTemplate
+		})
 		.when('/about', {
 			// controller: 'AboutCtrl as ctrl',
 			templateUrl: aboutTemplate

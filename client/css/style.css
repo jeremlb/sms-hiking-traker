@@ -184,3 +184,16 @@ header nav {
     margin-bottom: 15px;
     border: 1px solid #bbb;
 }
+
+/* album dialog */
+.album-dialog {
+    position: absolute;
+    bottom: 0;
+    top: 112px;
+    width: 100%;
+    overflow: scroll;
+}
+
+.album-img {
+    ma
+}

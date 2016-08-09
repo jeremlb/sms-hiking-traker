@@ -1,7 +1,8 @@
 var angular = require('angular');
 
 module.exports = ['uiEventsService', 'pointsService', '$scope', 'mapService',
-          function (uiEventsService, pointsService, $scope, mapService) {
+          '$location', '$routeParams',
+          function (uiEventsService, pointsService, $scope, mapService, $location, $routeParams) {
 
      var _this = this;
 
@@ -20,6 +21,7 @@ module.exports = ['uiEventsService', 'pointsService', '$scope', 'mapService',
      });
 
      this.showDetail = function (item) {
+          //  $location.url('detail/' + '-KO_pZchey1I2CAPpP2_')
           _this.detailItem = item;
           _this.isDetailShown = true;
 

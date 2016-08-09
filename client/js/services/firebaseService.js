@@ -2,8 +2,8 @@ var angular = require('angular');
 
 require('firebase/firebase');
 
-module.exports = ['$firebaseArray', 'mapManagerService', 'pointsService',
- 		function ($firebaseArray, mapManagerService, pointsService) {
+module.exports = ['$firebaseArray', '$q', 'mapManagerService', 'pointsService',
+ 		function ($firebaseArray, $q, mapManagerService, pointsService) {
 
     var service = {
 		initFirebase: initFirebase
@@ -20,7 +20,7 @@ module.exports = ['$firebaseArray', 'mapManagerService', 'pointsService',
 	 var points = null;
 
 	 function initFirebase () {
-
+		 var deferred = $q.defer();
 		 // if the connexion is bad the could be generate an error
 		 // if maps is not loaded
 		 mapManagerService.onReady().then(function () {
@@ -30,8 +30,9 @@ module.exports = ['$firebaseArray', 'mapManagerService', 'pointsService',
 				 refs = firebase.database().ref().child('point');
 				 points = $firebaseArray(refs);
 
-
 				 points.$watch(function(event) {
+					 deferred.resolve(); // data loaded
+
 					 if(event.event === 'child_added') {
 						 pointsService.addPoint(event.key,
 							 					points.$getRecord(event.key))
@@ -42,8 +43,11 @@ module.exports = ['$firebaseArray', 'mapManagerService', 'pointsService',
 							 					   points.$getRecord(event.key));
 					 }
 				 });
+			 } else {
+				 deferred.resolve(); // data loaded
 			 }
 		 });
+		 return deferred.promise;
 	 }
 
     return service;
