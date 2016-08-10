@@ -36,11 +36,14 @@
 		<!-- build:css -->
 		<!-- endbuild -->
 	</head>
-	<body data-deferred-cloak>
+	<body data-deferred-cloak ng-controller="MainCtrl as mainCtrl">
 		<header class="bgc-indigo-500 tc-white-1 p+">
+
 			<lx-button class="nav-button" lx-type="icon" lx-color="white">
-				<i class="mdi mdi-menu"></i>
+				<i class="mdi mdi-{{ mainCtrl.icon }}"
+				ng-click="mainCtrl.sidebarButonEvent()"></i>
 			</lx-button>
+
 			<h1>
 				<img src="/static/img/logo.png">
 				<span>Jerem sur la route</span>
@@ -51,7 +54,7 @@
 				<a href="#/contact"><lx-button lx-type="flat" lx-color="white">Contact</lx-button></a>
 			</nav>
 		</header>
-		<div class="mobile-nav"></div>
+		<div class="mobile-nav" ng-class="{'mobile-nav-active': mainCtrl.isSidebarShown()}"></div>
 		<div class="main">
 			<ng-view ></ng-view>
 		</div>

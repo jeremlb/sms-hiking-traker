@@ -1,9 +1,9 @@
 var angular = require('angular');
 
 module.exports = ['firebaseService',  'mapService', 'pointsService',
-     'LxDialogService', '$cookies', 'uiEventsService',
+     'LxDialogService', 'uiEventsService',
 		function (firebaseService, mapService, pointsService,
-          LxDialogService, $cookies, uiEventsService) {
+          LxDialogService, uiEventsService) {
 
      var _this = this;
 
@@ -87,12 +87,4 @@ module.exports = ['firebaseService',  'mapService', 'pointsService',
 			 mapService.focusMarker(point.marker);
 		 }
 	 };
-
-     // open a dialog when it's the first visit and set a cookie
-     if($cookies.get('4d7b7ef4-5be4') === undefined) {
-          LxDialogService.open('premiere-visite');
-          $cookies.put('4d7b7ef4-5be4', true, {
-               'expires': new Date("March 8, 2100 17:05:00")
-          });
-     }
 }];

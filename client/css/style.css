@@ -38,13 +38,21 @@ header .nav-button {
 }
 
 .mobile-nav  {
-	background-color: green;
+	background-color: rgb(247,247,247);
 	position: absolute;
     top: 65px;
     bottom: 0;
     width: 340px;
     z-index: 20;
+	box-shadow: 4px 4px 10px 0px rgba(0,0,0,0.4);
+	left: -350px;
+	transition: 0.6s;
 }
+
+.mobile-nav-active {
+	left: 0px;
+}
+
 
 .main {
     position: absolute;
@@ -118,7 +126,7 @@ header .nav-button {
     /*display: none;*/
     background-color: rgb(247,247,247);
     z-index: 12;
-    left: -350px;
+    left: -400px;
     transition: 0.6s;
 }
 

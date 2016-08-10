@@ -10,7 +10,7 @@ def create_app(config=None, debug=False, testing=False, config_overrides=None):
             testing flask app mode
             config_overrides a dictionary given if config has to be overrides
     """
-    app = Flask(__name__)
+    app = Flask(__name__, static_folder='templates')
 
     if config is not None:
         app.config.from_object(config)
