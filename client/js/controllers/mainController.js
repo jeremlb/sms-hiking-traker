@@ -1,7 +1,7 @@
 var angular = require('angular');
 
-module.exports = ['sidebarService', '$cookies',
-		function (sidebarService, $cookies) {
+module.exports = ['sidebarService', '$cookies', '$timeout', 'LxDialogService',
+		function (sidebarService, $cookies, $timeout, LxDialogService) {
 
      var _this = this;
 
@@ -34,6 +34,10 @@ module.exports = ['sidebarService', '$cookies',
 		 return _isSidebarShown;
 	 };
 
+	 this.closeSidebar = function () {
+		 sidebarService.hideSidebar();
+	 };
+	 
 	 // init the listener for sidebar navigation
 	 if(sidebarService.hasListener(_sidebarListenerId)) {
 		 sidebarService.removeListener(_sidebarListenerId, _sidebarListener);
@@ -42,10 +46,12 @@ module.exports = ['sidebarService', '$cookies',
 	 sidebarService.addListener(_sidebarListenerId, _sidebarListener);
 
      // open a dialog when it's the first visit and set a cookie
-     if($cookies.get('4d7b7ef4-5be4') === undefined) {
-          LxDialogService.open('premiere-visite');
-          $cookies.put('4d7b7ef4-5be4', true, {
-               'expires': new Date("March 8, 2100 17:05:00")
-          });
-     }
+	 $timeout(function () {
+		 if($cookies.get('4d7b7ef4-5be4') === undefined) {
+              LxDialogService.open('premiere-visite');
+              $cookies.put('4d7b7ef4-5be4', true, {
+                   'expires': new Date("March 8, 2100 17:05:00")
+              });
+         }
+	 }, 1000);
 }];

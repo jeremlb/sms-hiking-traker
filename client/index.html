@@ -54,8 +54,36 @@
 				<a href="#/contact"><lx-button lx-type="flat" lx-color="white">Contact</lx-button></a>
 			</nav>
 		</header>
-		<div class="mobile-nav" ng-class="{'mobile-nav-active': mainCtrl.isSidebarShown()}"></div>
-		<div class="main">
+		<div class="mobile-nav" ng-class="{'mobile-nav-active': mainCtrl.isSidebarShown()}">
+			<a href="#/" class="list-row mobile-nav-item"
+			ng-click="mainCtrl.closeSidebar()">
+				<span class="list-row__primary">
+					<lx-icon lx-id="send" lx-size="s" lx-color="indigo" lx-type="flat"></lx-icon>
+				</span>
+				<span  class="list-row__content">
+					<span class="display-block">Carte</span>
+				</span>
+			</a>
+			<a href="#/about" class="list-row mobile-nav-item"
+			ng-click="mainCtrl.closeSidebar()">
+				<span class="list-row__primary">
+					<lx-icon lx-id="send" lx-size="s" lx-color="indigo" lx-type="flat"></lx-icon>
+				</span>
+				<span  class="list-row__content">
+					<span class="display-block">A propos</span>
+				</span>
+			</a>
+			<a href="#/about" class="list-row mobile-nav-item"
+			ng-click="mainCtrl.closeSidebar()">
+				<span class="list-row__primary">
+					<lx-icon lx-id="send" lx-size="s" lx-color="indigo" lx-type="flat"></lx-icon>
+				</span>
+				<span  class="list-row__content">
+					<span class="display-block">Contact</span>
+				</span>
+			</a>
+		</div>
+		<div class="main" ng-click="mainCtrl.closeSidebar()">
 			<ng-view ></ng-view>
 		</div>
 

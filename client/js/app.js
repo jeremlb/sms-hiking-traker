@@ -13,7 +13,6 @@ var contactTemplate = require('ngtemplate!html!./views/app-contact.html');
 
 var module = angular.module('jerem-on-the-road', [
 	require('angular-route'),
-	require('angular-resource'),
 	require('angular-cookies'),
 	require('./vendors/gmaploader'),
 	require('./vendors/lumx'),
