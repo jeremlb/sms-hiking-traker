@@ -8,6 +8,7 @@ module.exports = ['firebaseService',  'mapService', 'pointsService',
      var _this = this;
 
      var _show_progress = true;
+	 var _isMenuSwipedUp = false;
 
 	 function getMedia(points, mediaType) {
 		 var point;
@@ -86,5 +87,19 @@ module.exports = ['firebaseService',  'mapService', 'pointsService',
 			 uiEventsService.openPanel(key);
 			 mapService.focusMarker(point.marker);
 		 }
+	 };
+
+	 this.isMenuSwipedUp = function () {
+		 return _isMenuSwipedUp;
+	 };
+
+	 this.showMenu = function () {
+		 _isMenuSwipedUp = true;
+		 console.log('up !');
+	 };
+
+	 this.hideMenu = function () {
+	 	_isMenuSwipedUp = false;
+	 	console.log('down !');
 	 };
 }];

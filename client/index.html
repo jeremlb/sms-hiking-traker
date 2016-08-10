@@ -84,13 +84,10 @@
 				</span>
 			</a>
 		</div>
-		<div class="main"
-		ng-click="mainCtrl.closeSidebar()"
-		ng-swipe-left="mainCtrl.closeSidebar()">
+		<div class="main">
 			<div class="swipe-bar" ng-swipe-right="mainCtrl.swipe($event)"
 			ng-click="mainCtrl.closeSidebar()"
-			ng-class="{'sidebar__open': mainCtrl.isSidebarShown()}"
-			>
+			ng-class="{'sidebar__open': mainCtrl.isSidebarShown()}">
 			</div>
 			<ng-view ></ng-view>
 		</div>

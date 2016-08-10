@@ -1,17 +1,23 @@
 <lx-progress lx-type="linear" lx-color="pink" ng-if="ctrl.showProgress()"></lx-progress>
-<div class="menu">
-    <nav class="p+">
-        <div class="album">
+<div class="menu" ng-swipe-up="ctrl.showMenu()"
+ng-class="{'menu__swipe_up': ctrl.isMenuSwipedUp()}">
+	<div class="mobile-message p+" ng-swipe-up="ctrl.showMenu()"
+	ng-click="ctrl.showMenu()">
+		Afficher plus
+	</div>
+    <nav class="p+" ng-swipe-down="ctrl.hideMenu()">
+        <div class="album" ng-swipe-down="ctrl.hideMenu()">
             <button class="btn btn--m bgc-indigo-50 tc-indigo-900 album-button"
-            lx-ripple="indigo-500" ng-click="ctrl.openAlbum()">Mon album photos</button>
+            lx-ripple="indigo-500" ng-click="ctrl.openAlbum()"
+			ng-swipe-down="ctrl.hideMenu()">Mon album photos</button>
         </div>
-        <div class="checkboxes">
-            <lx-checkbox ng-model="ctrl.itinerary">
+        <div class="checkboxes" ng-swipe-down="ctrl.hideMenu()">
+            <lx-checkbox ng-model="ctrl.itinerary" ng-swipe-down="ctrl.hideMenu()">
                 Afficher l'itinéraire initial
             </lx-checkbox>
         </div>
     </nav>
-    <div ui-panel></div>
+    <div ui-panel ng-swipe-down="ctrl.hideMenu()"></div>
 </div>
 <div class="map">
     <div ui-map></div>
