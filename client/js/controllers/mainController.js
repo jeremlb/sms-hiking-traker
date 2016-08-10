@@ -37,13 +37,21 @@ module.exports = ['sidebarService', '$cookies', '$timeout', 'LxDialogService',
 	 this.closeSidebar = function () {
 		 sidebarService.hideSidebar();
 	 };
-	 
+
+
 	 // init the listener for sidebar navigation
 	 if(sidebarService.hasListener(_sidebarListenerId)) {
 		 sidebarService.removeListener(_sidebarListenerId, _sidebarListener);
 	 }
 
 	 sidebarService.addListener(_sidebarListenerId, _sidebarListener);
+
+	 // touch screen events
+	 this.swipe = function (event) {
+      console.log(event);
+	  sidebarService.toggleSidebar();
+  	};
+
 
      // open a dialog when it's the first visit and set a cookie
 	 $timeout(function () {

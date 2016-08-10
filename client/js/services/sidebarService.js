@@ -6,6 +6,7 @@ module.exports = ['$window', '$rootScope', function ($window, $rootScope) {
         var service = {
             toggleSidebar : toggleSidebar,
             hideSidebar: hideSidebar,
+			openSidebar: openSidebar,
             isSidebarShown : isSidebarShown,
             addListener: addListener,
 			hasListener: hasListener,
@@ -27,6 +28,13 @@ module.exports = ['$window', '$rootScope', function ($window, $rootScope) {
                 notify();
             }
         }
+
+		function openSidebar() {
+			if(sidebarIsShown === false) {
+                sidebarIsShown = true;
+                notify();
+            }
+		}
 
         function addListener(id, callback) {
             if(typeof callback === 'function') {

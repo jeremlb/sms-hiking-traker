@@ -57,6 +57,22 @@ header .nav-button {
     color: #565656;
 }
 
+.swipe-bar {
+	background-color: transparent;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	width: 11px;
+	z-index: 11;
+}
+
+.sidebar__open {
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	width: auto;
+}
 
 .main {
     position: absolute;

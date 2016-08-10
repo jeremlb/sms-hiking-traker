@@ -54,7 +54,8 @@
 				<a href="#/contact"><lx-button lx-type="flat" lx-color="white">Contact</lx-button></a>
 			</nav>
 		</header>
-		<div class="mobile-nav" ng-class="{'mobile-nav-active': mainCtrl.isSidebarShown()}">
+		<div class="mobile-nav" ng-swipe-left="mainCtrl.closeSidebar()"
+		ng-class="{'mobile-nav-active': mainCtrl.isSidebarShown()}">
 			<a href="#/" class="list-row mobile-nav-item"
 			ng-click="mainCtrl.closeSidebar()">
 				<span class="list-row__primary">
@@ -83,7 +84,14 @@
 				</span>
 			</a>
 		</div>
-		<div class="main" ng-click="mainCtrl.closeSidebar()">
+		<div class="main"
+		ng-click="mainCtrl.closeSidebar()"
+		ng-swipe-left="mainCtrl.closeSidebar()">
+			<div class="swipe-bar" ng-swipe-right="mainCtrl.swipe($event)"
+			ng-click="mainCtrl.closeSidebar()"
+			ng-class="{'sidebar__open': mainCtrl.isSidebarShown()}"
+			>
+			</div>
 			<ng-view ></ng-view>
 		</div>
 
