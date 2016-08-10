@@ -55,7 +55,7 @@
             <lx-tab-pane>
 				<div class="p+">
 					<div class="tc-white-1 album-photo-img-container video-container"
-					ng-repeat="video in ctrl.videos track by $index">	
+					ng-repeat="video in ctrl.videos track by $index">
 						<video width="308" height="240" controls>
 							<source ng-src="{{ format.url }}" type="{{ format.content_type }}"
 							ng-repeat="format in video.format">

@@ -29,7 +29,21 @@ header h1 span {
 }
 
 header nav {
-    display: inline-block;
+	display: none;
+}
+
+/* mobile navigation */
+header .nav-button {
+	display: inline-block;
+}
+
+.mobile-nav  {
+	background-color: green;
+	position: absolute;
+    top: 65px;
+    bottom: 0;
+    width: 340px;
+    z-index: 20;
 }
 
 .main {
@@ -47,16 +61,17 @@ header nav {
 }
 
 .menu {
-    width: 340px;
+    width: 100%;
     margin-right: -5px;
     background-color: rgb(250, 250, 250);
     position: relative;
-    background-color: 2px solid #bbb;
+    border: none;
+	z-index:10;
 }
 
 .map {
     display: inline-block;
-    width: calc(100% - 339px);
+    width: 100%;
     margin-right: -1px;
 }
 
@@ -87,7 +102,7 @@ header nav {
 }
 
 .menu .list-container {
-    z-index: 0;
+    z-index: 11;
 }
 
 /* slide in to show the detail */
@@ -102,7 +117,7 @@ header nav {
 .detail-container {
     /*display: none;*/
     background-color: rgb(247,247,247);
-    z-index: 1;
+    z-index: 12;
     left: -350px;
     transition: 0.6s;
 }
@@ -255,12 +270,41 @@ header nav {
 }
 
 @media screen and (min-width: 770px) and (max-width: 1023px) {
+	.menu {
+	    width: 340px;
+		border-right: 2px solid #bbb;
+	    background-color: red;
+	}
+
+	.map {
+	    width: calc(100% - 339px);
+	}
+
 	.album-photo-img-container {
 	    width: 32.3%;
 	}
 }
 
 @media screen and (min-width: 1024px) {
+	header nav {
+		display: inline-block;
+	}
+
+	header .nav-button, .mobile-nav {
+		display: none;
+	}
+
+
+	.menu {
+		width: 340px;
+		border-right: 2px solid #bbb;
+		background-color: blue;
+	}
+
+	.map {
+		width: calc(100% - 339px);
+	}
+
 	.album-photo-img-container {
 	    width: 24%;
 	}

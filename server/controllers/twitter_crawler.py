@@ -138,8 +138,9 @@ def set_media_to_point(tweet, point):
             media['id'] not in points_medias['photos']:
                 point['photos'].append({
                     'id': media['id'],
-                    'url': media['media_url'],
-                    'https': media['media_url_https']
+                    'http': media['media_url'],
+                    'https': media['media_url_https'],
+					'size': media['size'],
                 })
 
                 updated = True
@@ -149,6 +150,9 @@ def set_media_to_point(tweet, point):
             media.has_key('video_info') and media['video_info'].has_key('variants'):
                 point['videos'].append({
                     'id': media['id'],
+					'http': media['media_url'],
+                    'https': media['media_url_https'],
+					'size': media['sizes'],
                     'format': get_video_format(media['video_info']['variants'])
                 })
 

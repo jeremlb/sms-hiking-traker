@@ -44,7 +44,7 @@
         </div>
         <div class="item-videos" ng-show="panelCtrl.detailItem.videos.length > 0">
             <div class="item-sub-header">VIDEOS</div>
-            <div ng-repeat="video in panelCtrl.detailItem.videos">
+            <div ng-repeat="video in panelCtrl.detailItem.videos" class="video-container">
                 <video width="308" height="240" controls>
                     <source ng-src="{{ format.url }}" type="{{ format.content_type }}"
                     ng-repeat="format in video.format">
