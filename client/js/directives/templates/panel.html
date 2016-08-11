@@ -1,5 +1,5 @@
-<div class="list-container">
-    <div class="item" ng-repeat="item in panelCtrl.items"
+<div class="list-container noPreventDefault">
+    <div class="item noPreventDefault" ng-repeat="item in panelCtrl.items"
     ng-click="panelCtrl.showDetail(item)">
         <div class="item-header">
             <div class="item-date">{{ item.date }}</div>
@@ -15,12 +15,12 @@
         </div>
     </div>
 </div>
-<div class="detail-container" ng-class="{'slide-in': panelCtrl.isDetailShown}">
+<div class="detail-container" class="noPreventDefault" ng-class="{'slide-in': panelCtrl.isDetailShown}">
     <div class="item">
-        <div class="detail-container-back">
-             <lx-button lx-type="icon" lx-color="grey"
+        <div class="detail-container-back noPreventDefault">
+             <lx-button class="noPreventDefault" lx-type="icon" lx-color="grey"
              ng-click="panelCtrl.hideDetail()">
-                 <i class="mdi mdi-arrow-left"></i>
+                 <i class="mdi mdi-arrow-left noPreventDefault"></i>
              </lx-button>
         </div>
         <div class="item-header">
