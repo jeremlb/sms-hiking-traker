@@ -14,7 +14,6 @@ module.exports = ['sidebarService', '$cookies', '$timeout', 'LxDialogService',
 
 	 // sidebar management
 	 function _sidebarListener (value) {
-		 console.log('toggle', value);
 		 _isSidebarShown = value;
 
 		 if(_isSidebarShown === true) {

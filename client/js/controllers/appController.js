@@ -1,14 +1,15 @@
 var angular = require('angular');
 
 module.exports = ['firebaseService',  'mapService', 'pointsService',
-     'LxDialogService', 'uiEventsService', '$rootScope',
+     'LxDialogService', 'uiEventsService', '$rootScope', '$timeout',
 		function (firebaseService, mapService, pointsService,
-          LxDialogService, uiEventsService, $rootScope) {
+          LxDialogService, uiEventsService, $rootScope, $timeout) {
 
      var _this = this;
 
      var _show_progress = true;
 	 var _isMenuSwipedUp = false;
+	 var _openCarousel = false;
 
 	 this.itinerary = false;
 
@@ -72,6 +73,8 @@ module.exports = ['firebaseService',  'mapService', 'pointsService',
 
      // album dialog
      this.dialogId = 'album-1';
+	 this.carouselId = 'carousel';
+
      this.openAlbum = function () {
           LxDialogService.open(_this.dialogId);
      };
@@ -79,6 +82,17 @@ module.exports = ['firebaseService',  'mapService', 'pointsService',
      this.closeAlbum = function () {
           LxDialogService.close(_this.dialogId);
      };
+
+	 this.openCarousel = function () {
+		 _openCarousel = true;
+		 _this.closeAlbum();
+	 };
+
+	 this.closeCarousel = function () {
+		  LxDialogService.close(_this.carouselId);
+	 };
+
+	 this.carouselId = 'carouselId';
 
 	 this.showDetail = function (key) {
 		 var point = pointsService.getPoint(key);
@@ -114,5 +128,15 @@ module.exports = ['firebaseService',  'mapService', 'pointsService',
 	 $rootScope.$on('$routeChangeStart', function (event) {
 		 _this.hideMenu();
 		 mapService.hideItinerary(); // in controller constructor hide itinerary
+	 });
+
+	 // to prevent any DOM problems with LxDialogService
+	 $rootScope.$on('lx-dialog__close-end', function (event, dialogId) {
+		 if(dialogId === _this.carouselId) {
+			 _this.openAlbum();
+		 } else if(dialogId === _this.dialogId && _openCarousel === true) {
+			 _openCarousel = false;
+			 LxDialogService.open(_this.carouselId);
+		 }
 	 });
 }];

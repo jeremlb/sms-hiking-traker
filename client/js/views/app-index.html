@@ -50,7 +50,7 @@
                 <div class="p+ dialog-pane">
                     <div class="tc-white-1 album-photo-img-container" ng-repeat="photo in ctrl.photos track by $index">
                         <img class="album-photo-img" ng-src="{{ photo.urlHttps }}:thumb"/>
-                        <div class="album-photo-img-hover">
+                        <div class="album-photo-img-hover" ng-click="ctrl.openCarousel()">
                             <a href="#/" ng-click="ctrl.showDetail(photo.smsKey)">Voir le SMS</a>
                         </div>
                     </div>
@@ -74,4 +74,18 @@
             </lx-tab-pane>
         </lx-tabs-panes>
     </lx-dialog-content>
+</lx-dialog>
+
+
+<!-- carousel photos and videos -->
+<lx-dialog id="{{ ctrl.carouselId }}" class="carousel-container" >
+    <lx-dialog-content>
+		<div class="carousel-close-btn">
+			<lx-button lx-size="l" lx-color="white" lx-type="icon"
+			ng-click="ctrl.closeCarousel()">
+				<i class="mdi mdi-close"></i>
+			</lx-button>
+		</div>
+		<div class="carousel-content">TEST</div>
+	</lx-dialog-content>
 </lx-dialog>

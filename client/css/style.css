@@ -338,6 +338,35 @@ header .nav-button {
 	left: 0;
 }
 
+/* carousel */
+
+.carousel-container {
+	position: absolute;
+    top: 0px;
+    bottom: 0px;
+    right: 0px;
+    left: 0px;
+    margin-left: 0;
+    width: initial;
+    background-color: black;
+	padding: 32px;
+}
+
+.carousel-content {
+	background-color: white;
+    position: absolute;
+    top: 32px;
+    bottom: 32px;
+    right: 32px;
+    left: 32px;
+}
+
+.carousel-close-btn {
+	position: absolute;
+	top: -2px;
+    right: -2px;
+}
+
 @media screen and (min-width: 770px) and (max-width: 1023px) {
 	.menu {
 	    width: 340px;
