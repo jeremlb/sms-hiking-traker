@@ -10,7 +10,8 @@
 			ng-swipe-down="ctrl.hideMenu()">Mon album photos</button>
         </div>
         <div class="checkboxes noPreventDefault" ng-swipe-down="ctrl.hideMenu()">
-            <lx-checkbox class="noPreventDefault" ng-model="ctrl.itinerary">
+            <lx-checkbox class="noPreventDefault" ng-model="ctrl.itinerary"
+			ng-click="ctrl.clickItineraryButton()">
                 Afficher l'itinéraire initial
             </lx-checkbox>
         </div>
@@ -46,9 +47,9 @@
     <lx-dialog-content>
         <lx-tabs-panes id="album-photo-video" class="album-dialog">
             <lx-tab-pane>
-                <div class="p+">
+                <div class="p+ dialog-pane">
                     <div class="tc-white-1 album-photo-img-container" ng-repeat="photo in ctrl.photos track by $index">
-                        <img class="album-photo-img" ng-src="{{ photo.urlHttps }}"/>
+                        <img class="album-photo-img" ng-src="{{ photo.urlHttps }}:thumb"/>
                         <div class="album-photo-img-hover">
                             <a href="#/" ng-click="ctrl.showDetail(photo.smsKey)">Voir le SMS</a>
                         </div>
@@ -57,17 +58,15 @@
             </lx-tab-pane>
 
             <lx-tab-pane>
-				<div class="p+">
+				<div class="p+ dialog-pane">
 					<div class="tc-white-1 album-photo-img-container video-container"
 					ng-repeat="video in ctrl.videos track by $index">
-						<video width="308" height="240" controls>
-							<source ng-src="{{ format.url }}" type="{{ format.content_type }}"
-							ng-repeat="format in video.format">
-							Your browser does not support the video tag.
-						</video>
-						<!-- <div class="album-photo-img-hover">
-							<a href="#/" ng-click="ctrl.showDetail(videos.smsKey)">Voir le SMS</a>
-						</div> -->
+						<div class="tc-white-1 album-photo-img-container" ng-repeat="video in ctrl.videos track by $index">
+	                        <img class="album-photo-img" ng-src="{{ video.urlHttps }}:thumb"/>
+	                        <div class="album-photo-img-hover">
+	                            <a href="#/" ng-click="ctrl.showDetail(video.smsKey)">Voir le SMS</a>
+	                        </div>
+	                    </div>
 					</div>
 				</div>
                 <div class="p++">

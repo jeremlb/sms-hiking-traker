@@ -7,6 +7,7 @@ var webpackConfig = require("./webpack.config.js");
 var files = {
 	css: [
 		'/static/css/lumx.css',
+		'/static/css/angular-carousel.css',
 		'/static/css/style.css'
 	]
 };
@@ -62,9 +63,15 @@ gulp.task('copy:fonts', function () {
 			.pipe(gulp.dest('./.build/fonts'));
 });
 
+gulp.task('copy:data', function () {
+	return gulp.src('client/data/*')
+			.pipe(gulp.dest('./.build/data'));
+});
+
 gulp.task('css:dev', function () {
 	return gulp.src([
 				'bower_components/lumx/dist/lumx.css',
+				'node_modules/angular-carousel/dist/angular-carousel.css',
 				'client/css/*'
 			])
 			.pipe(plugins.replace(/url\(.\//g, 'url(..\/'))
@@ -75,6 +82,7 @@ gulp.task('css:dev', function () {
 gulp.task('css:prod', function () {
 	return gulp.src([
 					'bower_components/lumx/dist/lumx.css',
+					'node_modules/angular-carousel/dist/angular-carousel.css',
 					'client/css/*'
 				])
       		   .pipe(plugins.autoprefixer())
@@ -136,6 +144,7 @@ gulp.task("build:dev", ['clean:all'], function () {
 	gulp.start("css:dev");
 	gulp.start("img:dev");
 	gulp.start('copy:fonts');
+	gulp.start('copy:data');
 	gulp.start('replace:dev');
 });
 
@@ -144,6 +153,7 @@ gulp.task("build:prod", ['clean:all'], function () {
 	gulp.start("css:prod");
 	gulp.start("img:prod");
 	gulp.start('copy:fonts');
+	gulp.start('copy:data');
 	gulp.start('replace:prod');
 
 });

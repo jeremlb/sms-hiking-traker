@@ -10,10 +10,12 @@
   "dependencies": {
     "angular": "^1.5.8",
     "angular-aria": "^1.5.8",
+    "angular-carousel": "^1.0.1",
     "angular-cookies": "^1.5.8",
     "angular-hammer": "^2.2.0",
     "angular-material": "^1.1.0-rc.5",
     "angular-route": "^1.5.7",
+    "angular-touch": "^1.5.8",
     "angularfire": "^2.0.1"
   },
   "devDependencies": {

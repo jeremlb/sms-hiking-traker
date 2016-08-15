@@ -2,7 +2,6 @@ var angular = require('angular');
 
 module.exports = ['mapManagerService', 'uiEventsService', '$timeout',
         function (mapManagerService, uiEventsService, $timeout) {
-    var service = {};
 
     var service = {
         onResume: onResume,
@@ -10,10 +9,13 @@ module.exports = ['mapManagerService', 'uiEventsService', '$timeout',
         updateMarker: updateMarker,
         removeMarker: removeMarker,
         focusMarker: focusMarker,
-        showMarkers: showMarkers
+        showMarkers: showMarkers,
+		showItinerary: showItinerary,
+		hideItinerary: hideItinerary
     };
 
     var _map = null;
+	var _isShown = false;
     var _markers = [];
     var _bounds = null;
     var _this = this;
@@ -30,6 +32,8 @@ module.exports = ['mapManagerService', 'uiEventsService', '$timeout',
             mapManagerService.createMap(mapOptions).then(function (map) {
                 _map = map;
                 initMap();
+
+				_addLayer(_map);
             });
         });
     }
@@ -113,6 +117,35 @@ module.exports = ['mapManagerService', 'uiEventsService', '$timeout',
             _map.fitBounds(_bounds);
         }
     }
+
+	function _addLayer(map) {
+		map.data.setStyle({
+			visible: false
+		});
+
+		map.data.loadGeoJson('/static/data/itinerary.json');
+		showOnMap(_isShown);
+	}
+
+	function showItinerary() {
+		 _isShown = true;
+		 showOnMap(_isShown);
+	}
+
+	function hideItinerary() {
+		_isShown = false;
+		showOnMap(_isShown);
+	}
+
+	function showOnMap(visibility) {
+		if(_map !== null) {
+			_map.data.setStyle({
+				visible: visibility,
+				strokeWeight: 4,
+				strokeColor: '#4CAF50',
+			});
+		}
+	}
 
     return service;
 }];

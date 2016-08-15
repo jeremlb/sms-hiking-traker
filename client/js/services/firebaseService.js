@@ -35,7 +35,7 @@ module.exports = ['$firebaseArray', '$q', 'mapManagerService', 'pointsService',
 
 					 if(event.event === 'child_added') {
 						 pointsService.addPoint(event.key,
-							 					points.$getRecord(event.key))
+							 					points.$getRecord(event.key));
 					 } else if(event.event === 'child_removed') {
 						 pointsService.removePoint(points.$getRecord(event.key));
 					 } else if(event.event === 'child_changed') {

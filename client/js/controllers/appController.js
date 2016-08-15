@@ -1,20 +1,23 @@
 var angular = require('angular');
 
 module.exports = ['firebaseService',  'mapService', 'pointsService',
-     'LxDialogService', 'uiEventsService',
+     'LxDialogService', 'uiEventsService', '$rootScope',
 		function (firebaseService, mapService, pointsService,
-          LxDialogService, uiEventsService) {
+          LxDialogService, uiEventsService, $rootScope) {
 
      var _this = this;
 
      var _show_progress = true;
 	 var _isMenuSwipedUp = false;
 
+	 this.itinerary = false;
+
 	 function getMedia(points, mediaType) {
 		 var point;
 		 var i = 0;
 		 var media = 0;
 		 var medias = [];
+		 var m;
 
 		//  console.log(point, points.length, point < points.length);
 
@@ -23,20 +26,21 @@ module.exports = ['firebaseService',  'mapService', 'pointsService',
 			 if(point.hasOwnProperty(mediaType) && point[mediaType]) {
 
 				 for(media = 0; media < point[mediaType].length; media += 1) {
-					 console.log(point[mediaType][media]);
-					 if(mediaType === 'photos') {
-						 medias.push({
-							 url: point[mediaType][media].url,
-							 urlHttps: point[mediaType][media].https,
-							 smsKey: point.key
-						 });
-					 } else if (mediaType === 'videos') {
-						 medias.push({
-							 formats: point[mediaType][media].format,
-							 smsKey: point.key
-						 });
+					 m = {
+						 url: point[mediaType][media].http,
+						 urlHttps: point[mediaType][media].https,
+						 size: point[mediaType][media].size,
+						 smsKey: point.key
+					 };
+
+					 if (mediaType === 'videos') {
+						 m.formats =  point[mediaType][media].format;
+						 m.smsKey = point.key;
 					 }
+
+					 medias.push(m);
 				 }
+
 			 }
 		 }
 
@@ -60,9 +64,6 @@ module.exports = ['firebaseService',  'mapService', 'pointsService',
 
 		 _this.photos = getMedia(points, 'photos');
 		 _this.videos = getMedia(points, 'videos');
-
-		 console.log(_this.photos);
-		 console.log(_this.videos);
 	 });
 
      this.showProgress = function () {
@@ -95,11 +96,23 @@ module.exports = ['firebaseService',  'mapService', 'pointsService',
 
 	 this.showMenu = function () {
 		 _isMenuSwipedUp = true;
-		 console.log('up !');
 	 };
 
 	 this.hideMenu = function () {
 	 	_isMenuSwipedUp = false;
-	 	console.log('down !');
 	 };
+
+	 this.clickItineraryButton = function () {
+		 if(_this.itinerary === true) {
+			 mapService.showItinerary();
+		 } else {
+			 mapService.hideItinerary();
+		 }
+	 };
+
+	 // when route change remove reset ui
+	 $rootScope.$on('$routeChangeStart', function (event) {
+		 _this.hideMenu();
+		 mapService.hideItinerary(); // in controller constructor hide itinerary
+	 });
 }];

@@ -181,8 +181,6 @@ header .nav-button {
 .menu .item {
     position: relative;
     padding: 16px;
-    padding-bottom: 0;
-
 }
 
 .menu .item:hover, .menu .item-selected, .mobile-nav-item:hover {
@@ -259,12 +257,18 @@ header .nav-button {
     overflow: scroll;
 }
 
+.dialog-pane {
+	text-align: center;
+}
+
 .album-photo-img-container {
     position: relative;
     display: inline-block;
-    margin: 0 0.5%;
-    width: 100%;
-	color:white;
+	/*width: 24%;*/
+	width: 32.3%;
+    float: left;
+    overflow: hidden;
+	margin: 0 0.5% 0.5%;
 }
 
 .album-photo-img-hover:hover {
@@ -296,10 +300,25 @@ header .nav-button {
 	right: 10px;
 	font-size: 0.7em;
 	font-weight: bold;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	-webkit-touch-callout: none;
 }
 
 .album-photo-img-hover a:hover {
 	text-decoration: underline;
+}
+
+.album-photo-img {
+	max-width: none;
+	width: 100%;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	-webkit-touch-callout: none;
 }
 
 /* videos container */
@@ -338,9 +357,9 @@ header .nav-button {
 		height: 100%;
 	}
 
-	.album-photo-img-container {
+	/*.album-photo-img-container {
 	    width: 32.3%;
-	}
+	}*/
 }
 
 @media screen and (min-width: 1024px) {
@@ -375,6 +394,7 @@ header .nav-button {
 	}
 
 	.album-photo-img-container {
-	    width: 24%;
+		width: 180px;
+		margin: 0 5px 10px;
 	}
 }

@@ -13,14 +13,22 @@ module.exports = ['uiEventsService', 'pointsService', '$scope', 'mapService',
      uiEventsService.setPanelListener(function (key) {
 		_this.detailItem = pointsService.getPoint(key);
         _this.isDetailShown = true;
-		
+
 		if(!$scope.$$phase) {
 			$scope.$apply();
 		}
      });
 
      uiEventsService.addUiListener(function () {
-          _this.items = pointsService.getPoints();
+		 var o_points = [];
+		 var points = pointsService.getPoints();
+		 var point = points.length - 1;
+
+		 for(; point >= 0; point -= 1) {
+			 o_points.push(points[point]);
+		 }
+		 
+          _this.items = o_points;
      });
 
      this.showDetail = function (item) {

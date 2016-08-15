@@ -13,9 +13,13 @@ var indexTemplate = require('ngtemplate!html!./views/app-index.html');
 var aboutTemplate = require('ngtemplate!html!./views/app-about.html');
 var contactTemplate = require('ngtemplate!html!./views/app-contact.html');
 
+require('angular-touch');
+require('angular-carousel');
+
 var module = angular.module('jerem-on-the-road', [
 	require('angular-route'),
 	require('angular-cookies'),
+	'angular-carousel',
 	'swipe',
 	require('./vendors/gmaploader'),
 	require('./vendors/lumx'),
