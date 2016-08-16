@@ -5,9 +5,11 @@
             <div class="item-date">{{ item.date }}</div>
             <div class="item-icons">
                 <img ng-src="{{ panelCtrl.getWeatherIconUrl(item) }}"
-                lx-tooltip="Méteo" class="bgc-indigo-500">
+                lx-tooltip="{{ panelCtrl.getWeatherTooltip(item) }}"
+				class="bgc-indigo-500">
                 <img ng-src="{{ panelCtrl.getBreakIconUrl(item) }}"
-                lx-tooltip="Pause" class="bgc-green-500">
+                lx-tooltip="{{ panelCtrl.getBreakTooltip(item) }}"
+				class="bgc-green-500">
             </div>
         </div>
         <div class="item-message">
@@ -27,8 +29,9 @@
             <div class="item-date">{{ panelCtrl.detailItem.date }}</div>
             <div class="item-icons">
                 <img ng-src="{{ panelCtrl.getWeatherIconUrl(panelCtrl.detailItem) }}"
-                lx-tooltip="Méteo" class="bgc-light-green-500">
-                <img ng-src="{{ panelCtrl.getBreakIconUrl(panelCtrl.detailItem) }}"
+                lx-tooltip="{{ panelCtrl.getWeatherTooltip(panelCtrl.detailItem) }}"
+				class="bgc-light-green-500">
+                <img ng-src="{{ panelCtrl.getBreakTooltip(panelCtrl.detailItem) }}"
                 lx-tooltip="Pause" class="bgc-light-green-500">
             </div>
         </div>

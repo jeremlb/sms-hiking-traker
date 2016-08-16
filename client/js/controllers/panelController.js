@@ -27,7 +27,7 @@ module.exports = ['uiEventsService', 'pointsService', '$scope', 'mapService',
 		 for(; point >= 0; point -= 1) {
 			 o_points.push(points[point]);
 		 }
-		 
+
           _this.items = o_points;
      });
 
@@ -57,5 +57,44 @@ module.exports = ['uiEventsService', 'pointsService', '$scope', 'mapService',
                // TODO: change to break icon
                return '/static/img/break/' + item.break + '.png';
           }
+     };
+
+	 this.getWeatherTooltip = function (item) {
+		 var tooltip = null;
+
+		 if(item.weather === '') {
+			 tooltip = null;
+		 } else if(item.weather === '') {
+			 tooltip = null;
+		 } else if(item.weather === '') {
+			 tooltip = null;
+		 } else if(item.weather === '') {
+			 tooltip = null;
+		 } else if(item.weather === '') {
+			 tooltip = null;
+		 } else if(item.weather === '') {
+         }
+
+		 return tooltip;
+     };
+
+     this.getBreakTooltip = function (item) {
+		 var tooltip = 'TEST';
+
+		if(item.break === '') {
+			tooltip = null;
+		} else if(item.break === '') {
+			tooltip = null;
+		} else if(item.break === '') {
+			tooltip = null;
+		} else if(item.break === '') {
+			tooltip = null;
+		} else if(item.break === '') {
+			tooltip = null;
+		} else if(item.break === '') {
+			tooltip = null;
+		 }
+
+		return tooltip;
      };
 }];
