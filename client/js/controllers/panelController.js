@@ -8,7 +8,7 @@ module.exports = ['uiEventsService', 'pointsService', '$scope', 'mapService',
 
      this.isDetailShown = false;
      this.detailItem = {};
-     this.items = pointsService.getPoints();
+     this.items = [].concat(pointsService.getPoints()).reverse();
 
      uiEventsService.setPanelListener(function (key) {
 		_this.detailItem = pointsService.getPoint(key);
