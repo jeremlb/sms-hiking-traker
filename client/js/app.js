@@ -77,7 +77,7 @@ module.config(['$routeProvider', 'uiGmapGoogleMapApiProvider',
 		});
 
 	uiGmapGoogleMapApiProvider.configure({
-		v: '3.24', //defaults to latest 3.X anyhow
+		v: '3.25', //defaults to latest 3.X anyhow
 		libraries: 'weather,geometry,visualization',
 		key: 'AIzaSyA2kDhi5S_z0Lu8k7HiYRMdwnRumhGA0sc'
 	});

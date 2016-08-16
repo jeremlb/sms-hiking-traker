@@ -30,9 +30,10 @@
             <div class="item-icons">
                 <img ng-src="{{ panelCtrl.getWeatherIconUrl(panelCtrl.detailItem) }}"
                 lx-tooltip="{{ panelCtrl.getWeatherTooltip(panelCtrl.detailItem) }}"
+				class="bgc-indigo-500">
+                <img ng-src="{{ panelCtrl.getBreakIconUrl(panelCtrl.detailItem) }}"
+                lx-tooltip="{{ panelCtrl.getBreakTooltip(panelCtrl.detailItem) }}"
 				class="bgc-light-green-500">
-                <img ng-src="{{ panelCtrl.getBreakTooltip(panelCtrl.detailItem) }}"
-                lx-tooltip="Pause" class="bgc-light-green-500">
             </div>
         </div>
         <div class="item-message" ng-show="panelCtrl.detailItem.message.length > 0">

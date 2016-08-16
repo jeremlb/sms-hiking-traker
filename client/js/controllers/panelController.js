@@ -20,15 +20,8 @@ module.exports = ['uiEventsService', 'pointsService', '$scope', 'mapService',
      });
 
      uiEventsService.addUiListener(function () {
-		 var o_points = [];
 		 var points = pointsService.getPoints();
-		 var point = points.length - 1;
-
-		 for(; point >= 0; point -= 1) {
-			 o_points.push(points[point]);
-		 }
-
-          _this.items = o_points;
+         _this.items = [].concat(points).reverse();
      });
 
      this.showDetail = function (item) {
