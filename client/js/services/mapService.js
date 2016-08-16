@@ -66,7 +66,10 @@ module.exports = ['mapManagerService', 'uiEventsService', '$timeout',
     }
 
     function getUrlIcon(breakType) {
-        return '/static/img/marker/marker-' + breakType + '.png';
+        return {
+			url: '/static/img/marker/marker-' + breakType + '.png',
+			scaledSize: new google.maps.Size(30, 42)
+		};
     }
 
     function addMarker(key, options) {

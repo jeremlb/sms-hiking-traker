@@ -50,8 +50,8 @@
                 <div class="p+ dialog-pane">
                     <div class="tc-white-1 album-photo-img-container" ng-repeat="photo in ctrl.photos track by $index">
                         <img class="album-photo-img" ng-src="{{ photo.urlHttps }}:thumb"/>
-                        <div class="album-photo-img-hover" ng-click="ctrl.openCarousel()">
-                            <a href="#/" ng-click="ctrl.showDetail(photo.smsKey)">Voir le SMS</a>
+                        <div class="album-photo-img-hover" ng-click="ctrl.openCarousel('photos', $index)">
+                            <a href="#/" ng-click="ctrl.showDetail($event, photo.smsKey)">Voir le SMS</a>
                         </div>
                     </div>
                 </div>
@@ -63,14 +63,12 @@
 					ng-repeat="video in ctrl.videos track by $index">
 						<div class="tc-white-1 album-photo-img-container" ng-repeat="video in ctrl.videos track by $index">
 	                        <img class="album-photo-img" ng-src="{{ video.urlHttps }}:thumb"/>
-	                        <div class="album-photo-img-hover">
-	                            <a href="#/" ng-click="ctrl.showDetail(video.smsKey)">Voir le SMS</a>
+	                        <div class="album-photo-img-hover"  ng-click="ctrl.openCarousel('videos', $index)">
+	                            <a href="#/" ng-click="ctrl.showDetail($event, video.smsKey)">Voir le SMS</a>
 	                        </div>
 	                    </div>
 					</div>
 				</div>
-                <div class="p++">
-                </div>
             </lx-tab-pane>
         </lx-tabs-panes>
     </lx-dialog-content>
@@ -86,6 +84,33 @@
 				<i class="mdi mdi-close"></i>
 			</lx-button>
 		</div>
-		<div class="carousel-content">TEST</div>
+		<div class="carousel-content" ng-keypress="ctrl.carouselKeyPress()">
+			<ul rn-carousel rn-carousel-controls rn-carousel-controls-allow-loop
+			rn-carousel-transition="none" rn-carousel-index="ctrl.carouselIndex"
+			class="rn-carousel">
+			  <li ng-repeat="media in ctrl.carouselMedias track by $index">
+				  <div class="carousel-content-media"
+				  ng-if="media.type == 'photo'">
+				  {{ media }}
+					  <img ng-src="{{ media.urlHttps }}"/>
+					  <a href="#/" ng-click="ctrl.showDetail($event, media.smsKey)">
+						  Voir le SMS
+					  </a>
+				  </div>
+				  <div class="carousel-content-media carousel-content-media-center"
+				  ng-if="media.type == 'video'">
+					  <video controls>
+	                      <source ng-src="{{ format.url }}" type="{{ format.content_type }}"
+	                      ng-repeat="format in media.formats">
+	                      Your browser does not support the video tag.
+	                  </video>
+					  <a href="#/" ng-click="ctrl.showDetail($event, media.smsKey)">
+						  Voir le SMS
+					  </a>
+				  </div>
+			  </li>
+			</ul>
+		</div>
+
 	</lx-dialog-content>
 </lx-dialog>

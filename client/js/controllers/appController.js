@@ -1,16 +1,22 @@
 var angular = require('angular');
 
 module.exports = ['firebaseService',  'mapService', 'pointsService',
-     'LxDialogService', 'uiEventsService', '$rootScope', '$timeout',
+     'LxDialogService', 'uiEventsService', '$rootScope', '$timeout', '$document',
 		function (firebaseService, mapService, pointsService,
-          LxDialogService, uiEventsService, $rootScope, $timeout) {
+          LxDialogService, uiEventsService, $rootScope, $timeout, $document) {
 
      var _this = this;
 
      var _show_progress = true;
 	 var _isMenuSwipedUp = false;
-	 var _openCarousel = false;
 
+	 var _openCarousel = false;
+	 var _openAlbum = false;
+
+	 var _isCarouselOpen = false;
+	 var _isAlbumOpen = false;
+
+	 this.carouselMedias = [];
 	 this.itinerary = false;
 
 	 function getMedia(points, mediaType) {
@@ -31,12 +37,14 @@ module.exports = ['firebaseService',  'mapService', 'pointsService',
 						 url: point[mediaType][media].http,
 						 urlHttps: point[mediaType][media].https,
 						 size: point[mediaType][media].size,
-						 smsKey: point.key
+						 smsKey: point.key,
+						 type: 'photo'
 					 };
 
 					 if (mediaType === 'videos') {
 						 m.formats =  point[mediaType][media].format;
 						 m.smsKey = point.key;
+						 m.type = 'video';
 					 }
 
 					 medias.push(m);
@@ -48,8 +56,25 @@ module.exports = ['firebaseService',  'mapService', 'pointsService',
 		 return medias;
 	 }
 
+	 function _closeAllDialog() {
+		 _openAlbum = false;
+		 _openCarousel = false;
+
+		 if(_isCarouselOpen === true) {
+			 console.log('close carousel');
+			 _this.closeCarousel();
+		 }
+
+		 if(_isAlbumOpen === true) {
+			 console.log('close album');
+			 _this.closeAlbum();
+		 }
+	 }
+
      this.photos = [];
 	 this.videos = [];
+
+	 this.carouselIndex = 0;
 
      // init
      mapService.onResume(); // init the map when ready
@@ -76,29 +101,44 @@ module.exports = ['firebaseService',  'mapService', 'pointsService',
 	 this.carouselId = 'carousel';
 
      this.openAlbum = function () {
+		  _isAlbumOpen = true;
           LxDialogService.open(_this.dialogId);
      };
 
      this.closeAlbum = function () {
-          LxDialogService.close(_this.dialogId);
+		 _isAlbumOpen = false;
+		 LxDialogService.close(_this.dialogId);
      };
 
-	 this.openCarousel = function () {
+	 this.openCarousel = function (mediaType, $index) {
+		 console.log('open carousel');
+		 _this.carouselIndex = $index;
+
+		 if(mediaType === 'photos') {
+			 _this.carouselMedias = _this.photos;
+		 } else {
+			 _this.carouselMedias = _this.videos;
+		 }
+
 		 _openCarousel = true;
 		 _this.closeAlbum();
 	 };
 
 	 this.closeCarousel = function () {
+		  _isCarouselOpen = false;
 		  LxDialogService.close(_this.carouselId);
 	 };
 
 	 this.carouselId = 'carouselId';
 
-	 this.showDetail = function (key) {
+	 this.showDetail = function ($event, key) {
+		 console.log('show detail');
+		 $event.stopPropagation();
+		 _closeAllDialog();
+
 		 var point = pointsService.getPoint(key);
 
 		 if(point && point.marker) {
-			 _this.closeAlbum();
 			 uiEventsService.openPanel(key);
 			 mapService.focusMarker(point.marker);
 		 }
@@ -122,6 +162,8 @@ module.exports = ['firebaseService',  'mapService', 'pointsService',
 		 } else {
 			 mapService.hideItinerary();
 		 }
+
+		 _this.hideMenu();
 	 };
 
 	 // when route change remove reset ui
@@ -132,11 +174,26 @@ module.exports = ['firebaseService',  'mapService', 'pointsService',
 
 	 // to prevent any DOM problems with LxDialogService
 	 $rootScope.$on('lx-dialog__close-end', function (event, dialogId) {
-		 if(dialogId === _this.carouselId) {
+
+		 console.log(_openCarousel);
+		 console.log('event dialog close');
+		 if(dialogId === _this.carouselId && _openAlbum === true) {
+			 _openAlbum = false;
 			 _this.openAlbum();
+
 		 } else if(dialogId === _this.dialogId && _openCarousel === true) {
 			 _openCarousel = false;
+			 _openAlbum = true;
+			 _isCarouselOpen = true;
 			 LxDialogService.open(_this.carouselId);
 		 }
 	 });
+
+	// $document.keydown(function(e){
+	// 	  console.log(e);
+	//   });
+
+	// this.carouselKeyPress = function (event) {
+	//    console.log(event);
+	// };
 }];

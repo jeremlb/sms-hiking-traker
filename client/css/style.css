@@ -172,7 +172,7 @@ header .nav-button {
  */
 .detail-container {
     /*display: none;*/
-    background-color: rgb(247,247,247);
+    background-color: white;
     z-index: 12;
     left: -100%;
     transition: 0.7s;
@@ -181,6 +181,7 @@ header .nav-button {
 .menu .item {
     position: relative;
     padding: 16px;
+	padding-bottom: 0;
 }
 
 .menu .item:hover, .menu .item-selected, .mobile-nav-item:hover {
@@ -353,12 +354,65 @@ header .nav-button {
 }
 
 .carousel-content {
-	background-color: white;
     position: absolute;
     top: 32px;
     bottom: 32px;
     right: 32px;
     left: 32px;
+}
+
+.carousel-content .rn-carousel {
+	height: 100%;
+}
+
+.rn-carousel-controls {
+	display: none;
+	position: absolute;
+	top: 0;
+	height: calc(100% - 33px);
+	width: 100%;
+	color: white;
+	cursor: auto;
+}
+
+/*.rn-carousel-control {
+	bottom: 0;
+	top:auto;
+}*/
+
+.carousel-content img {
+	display: block;
+	max-height: 100%;
+	max-width: 100%;
+	margin: auto;
+}
+
+.carousel-content-media {
+	height: 100%;
+	width: 100%;
+}
+
+.carousel-content-media-center {
+	text-align: center;
+}
+
+.carousel-content-media a {
+	right: 15px;
+    bottom: 0px;
+    position: absolute;
+    color: white;
+    text-decoration: none;
+    font-size: 0.8em;
+}
+
+.carousel-content-media a:hover {
+    text-decoration: underline;
+}
+
+.carousel-content-media video {
+	max-height: 100%;
+	max-width: 100%;
+	width: 80%;
 }
 
 .carousel-close-btn {
@@ -386,9 +440,9 @@ header .nav-button {
 		height: 100%;
 	}
 
-	/*.album-photo-img-container {
-	    width: 32.3%;
-	}*/
+	.rn-carousel-controls {
+		display: block;
+	}
 }
 
 @media screen and (min-width: 1024px) {
@@ -425,5 +479,17 @@ header .nav-button {
 	.album-photo-img-container {
 		width: 180px;
 		margin: 0 5px 10px;
+	}
+
+	.rn-carousel-controls {
+		display: block;
+	}
+
+	.carousel-content-media {
+		-webkit-user-drag: none;
+		-khtml-user-drag: none;
+		-moz-user-drag: none;
+		-o-user-drag: none;
+		user-drag: none;
 	}
 }
