@@ -422,6 +422,26 @@ header .nav-button {
     right: -2px;
 }
 
+
+/* CSS for about me and contact pages */
+.text-container {
+	height: 100%;
+	overflow-y: scroll;
+}
+
+.text-container img {
+	margin: auto;
+}
+
+.text-container a {
+	text-decoration: none;
+	color: black;
+}
+
+.text-container a:hover {
+	text-decoration: underline;
+}
+
 @media screen and (min-width: 770px) and (max-width: 1023px) {
 	.menu {
 	    width: 340px;

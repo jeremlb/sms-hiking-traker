@@ -10,7 +10,6 @@ var angular = require('angular');
 require('angular-swipe');
 
 var indexTemplate = require('ngtemplate!html!./views/app-index.html');
-var aboutTemplate = require('ngtemplate!html!./views/app-about.html');
 var contactTemplate = require('ngtemplate!html!./views/app-contact.html');
 
 require('angular-touch');
@@ -63,10 +62,6 @@ module.config(['$routeProvider', 'uiGmapGoogleMapApiProvider',
 		.when('/detail/:id', {
 			controller: 'AppCtrl as ctrl',
 			templateUrl: indexTemplate
-		})
-		.when('/about', {
-			// controller: 'AboutCtrl as ctrl',
-			templateUrl: aboutTemplate
 		})
 		.when('/contact', {
 			// controller: 'ContactCtrl as ctrl',
