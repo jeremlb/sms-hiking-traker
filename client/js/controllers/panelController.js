@@ -62,38 +62,55 @@ module.exports = ['uiEventsService', 'pointsService', '$scope', 'mapService',
 	 this.getWeatherTooltip = function (item) {
 		 var tooltip = null;
 
-		 if(item.weather === '') {
-			 tooltip = null;
-		 } else if(item.weather === '') {
-			 tooltip = null;
-		 } else if(item.weather === '') {
-			 tooltip = null;
-		 } else if(item.weather === '') {
-			 tooltip = null;
-		 } else if(item.weather === '') {
-			 tooltip = null;
-		 } else if(item.weather === '') {
-         }
+		 if(item.weather === 'clear-day') {
+			 tooltip = 'Grand soleil';
+		 } else if(item.weather === 'clear-night') {
+			 tooltip = 'Belle nuit clair';
+		 } else if(item.weather === 'cloudy-weather') {
+			 tooltip = 'Nuageux';
+		 } else if(item.weather === 'haze-weather') {
+			 tooltip = 'Brumeux';
+		 } else if(item.weather === 'most-cloudy') {
+			 tooltip = 'Très nuageux';
+		 } else if(item.weather === 'most-cloudy-night') {
+			 tooltip = 'Nuit très nuageux';
+         } else if(item.weather === 'rain-snow') {
+			 tooltip = 'Pluie et neige';
+		 } else if(item.weather === 'rainy-weather') {
+			 tooltip = 'Pluvieux';
+		 } else if(item.weather === 'showcase') {
+			 tooltip = 'Temps pourris';
+		 } else if(item.weather === 'rain-snow') {
+			 tooltip = 'Pluie et neige';
+		 } else if(item.weather === 'snow-weather') {
+			 tooltip = 'Neigeux';
+		 } else if(item.weather === 'storm-weather') {
+			 tooltip = 'Tempête';
+		 } else if(item.weather === 'thunder-weather') {
+			 tooltip = 'Orageux';
+		 } else if(item.weather === 'unknown') {
+			 tooltip = 'Pas de description';
+		 } else if(item.weather === 'windy-weather') {
+			 tooltip = 'Venteux';
+		 }
 
 		 return tooltip;
      };
 
      this.getBreakTooltip = function (item) {
-		 var tooltip = 'TEST';
+		 var tooltip = null;
 
-		if(item.break === '') {
-			tooltip = null;
-		} else if(item.break === '') {
-			tooltip = null;
-		} else if(item.break === '') {
-			tooltip = null;
-		} else if(item.break === '') {
-			tooltip = null;
-		} else if(item.break === '') {
-			tooltip = null;
-		} else if(item.break === '') {
-			tooltip = null;
-		 }
+		if(item.break === 'eat') {
+			tooltip = 'Pause dej\'';
+		} else if(item.break === 'camp') {
+			tooltip = 'Bivouac';
+		} else if(item.break === 'break') {
+			tooltip = 'Pause détente';
+		} else if(item.break === 'finish') {
+			tooltip = 'C\'est fini !';
+		} else if(item.break === 'start') {
+			tooltip = 'C\'est parti !';
+		}
 
 		return tooltip;
      };
