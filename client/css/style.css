@@ -176,6 +176,7 @@ header .nav-button {
     z-index: 12;
     left: -100%;
     transition: 0.7s;
+	padding-bottom: 16px;
 }
 
 .menu .item {

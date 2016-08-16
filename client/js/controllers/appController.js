@@ -52,6 +52,7 @@ module.exports = ['firebaseService',  'mapService', 'pointsService',
 
 			 }
 		 }
+		 console.log(medias);
 
 		 return medias;
 	 }
@@ -111,13 +112,13 @@ module.exports = ['firebaseService',  'mapService', 'pointsService',
      };
 
 	 this.openCarousel = function (mediaType, $index) {
-		 console.log('open carousel');
 		 _this.carouselIndex = $index;
 
 		 if(mediaType === 'photos') {
 			 _this.carouselMedias = _this.photos;
 		 } else {
 			 _this.carouselMedias = _this.videos;
+			 console.log(_this.carouselMedias);
 		 }
 
 		 _openCarousel = true;
@@ -129,10 +130,29 @@ module.exports = ['firebaseService',  'mapService', 'pointsService',
 		  LxDialogService.close(_this.carouselId);
 	 };
 
+	 function _carouselPrev() {
+		 if(_isCarouselOpen === true) {
+			 if(_this.carouselIndex - 1 < 0) {
+				 _this.carouselIndex = _this.carouselMedias.length - 1;
+			 } else {
+				 _this.carouselIndex -= 1;
+			 }
+		 }
+	 }
+
+	 function _carouselNext() {
+		 if(_isCarouselOpen === true) {
+			 if(_this.carouselIndex + 1 > _this.carouselMedias.length - 1) {
+			 	_this.carouselIndex = 0;
+			 } else {
+			 	_this.carouselIndex += 1;
+			 }
+		 }
+	 }
+
 	 this.carouselId = 'carouselId';
 
 	 this.showDetail = function ($event, key) {
-		 console.log('show detail');
 		 $event.stopPropagation();
 		 _closeAllDialog();
 
@@ -174,9 +194,6 @@ module.exports = ['firebaseService',  'mapService', 'pointsService',
 
 	 // to prevent any DOM problems with LxDialogService
 	 $rootScope.$on('lx-dialog__close-end', function (event, dialogId) {
-
-		 console.log(_openCarousel);
-		 console.log('event dialog close');
 		 if(dialogId === _this.carouselId && _openAlbum === true) {
 			 _openAlbum = false;
 			 _this.openAlbum();
@@ -189,11 +206,14 @@ module.exports = ['firebaseService',  'mapService', 'pointsService',
 		 }
 	 });
 
-	// $document.keydown(function(e){
-	// 	  console.log(e);
-	//   });
+	$document.keyup(function (e) {
+		var left_arrow = 37;
+		var right_arrow = 39;
 
-	// this.carouselKeyPress = function (event) {
-	//    console.log(event);
-	// };
+		if(e.keyCode === left_arrow) {
+			_carouselPrev();
+		} else if(e.keyCode === right_arrow)  {
+			_carouselNext();
+		}
+	});
 }];
